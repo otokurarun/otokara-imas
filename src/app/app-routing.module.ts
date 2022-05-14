@@ -7,10 +7,14 @@ const routes: Routes = [
     path: '',
     component: SongListComponent,
   },
+  {
+    path: 'songs/keyword/:keyword',
+    component: SongListComponent,
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

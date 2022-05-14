@@ -1,5 +1,20 @@
-<div class="song-list">
+<form (ngSubmit)="searchSong(keywordInput.value)">
+  <mat-form-field appearance="outline" style="width: 100%">
+    <mat-label>キーワードを入力</mat-label>
+    <input matInput name="keyword" #keywordInput />
+    <button mat-icon-button matSuffix aria-label="登録">
+      <mat-icon> send </mat-icon>
+    </button>
+  </mat-form-field>
+</form>
+
+<div *ngIf="this.keyword" class="song-list">
   <p>
-    「〇〇○」を含む検索結果がXX件見つかりました。
+    「{{ this.keyword }}」を含む検索結果が{{ this.songs.length }}件見つかりました。
   </p>
+  <ul>
+    <li *ngFor="let song of this.songs">
+      {{ song.title }}
+    </li>
+  </ul>
 </div>

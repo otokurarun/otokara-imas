@@ -29,7 +29,6 @@
     "rxjs": "~7.5.0",
     "ts-node-dev": "^1.1.8",
     "tslib": "^2.3.0",
-    "uuid": "^8.3.2",
     "zone.js": "~0.11.4"
   },
   "devDependencies": {
@@ -40,7 +39,6 @@
     "@types/jasmine": "~3.10.0",
     "@types/node": "^12.20.52",
     "@types/node-fetch": "^2.6.1",
-    "@types/uuid": "^8.3.4",
     "concurrently": "^7.1.0",
     "jasmine-core": "~4.0.0",
     "karma": "~6.3.0",

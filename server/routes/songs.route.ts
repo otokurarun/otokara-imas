@@ -1,9 +1,9 @@
 import { Router } from 'express';
 import fetch from 'node-fetch';
-import { v4 as uuidv4 } from 'uuid';
-import * as crypto from 'crypto';
 
 const songsRouter = Router();
+
+const cache: any = {};
 
 // Denmoku API についての定義
 const DENMOKU_SEARCH_API_ENDPOINT =
@@ -14,6 +14,12 @@ const DENMOKU_SEARCH_API_ENDPOINT =
  * 指定されたキーワードから楽曲を返すAPI
  */
 songsRouter.get('/keyword/:keyword', async (req, res) => {
+  // 開発時のリクエストを高速化するためにキャッシュから呼び出し
+  if (cache[req.params.keyword]) {
+    res.send(cache[req.params.keyword]);
+    return;
+  }
+
   // Denmoku API へ楽曲検索をリクエスト
   const requestUrl = `${DENMOKU_SEARCH_API_ENDPOINT}/SearchVariousByKeywordApi`;
   const requestBody = {
@@ -43,8 +49,12 @@ songsRouter.get('/keyword/:keyword', async (req, res) => {
 
   // 検索結果を取得
   const result = await apiResponse.json();
-  let songs = result.list;
+  const songs = result.list;
 
+  // 検索結果をキャッシュに保存
+  cache[req.params.keyword] = songs;
+
+  // 検索結果をクライアントに返す
   res.send(songs);
 });
 
