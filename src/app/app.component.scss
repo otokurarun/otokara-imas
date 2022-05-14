@@ -3,6 +3,11 @@
 
   &__title {
     margin: 0 auto;
+    font-size: 1.6rem;
+
+    @media screen and (max-width:767px) {
+      font-size: 1.5rem;
+    }
 
     >a {
       color: white;
@@ -10,7 +15,7 @@
     }
 
     &--small {
-      font-size: 0.3em;
+      font-size: 0.5em;
     }
   }
 }
