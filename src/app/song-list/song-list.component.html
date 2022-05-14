@@ -1,21 +1,41 @@
-<form (ngSubmit)="searchSong(keywordInput.value)">
-  <mat-form-field appearance="outline" floatLabel="always" style="width: 100%">
-    <mat-label>キーワードを入力</mat-label>
-    <input placeholder="例）ずるじゃん" matInput name="keyword" #keywordInput />
-    <button mat-icon-button matSuffix aria-label="登録">
-      <mat-icon> send </mat-icon>
-    </button>
-  </mat-form-field>
-</form>
+<div *ngIf="this.searchType == 'keyword' || this.searchType == 'none'">
+  <form (ngSubmit)="searchSongByKeyword(keywordInput.value)">
+    <mat-form-field appearance="outline" floatLabel="always" style="width: 100%">
+      <mat-label>キーワードを入力</mat-label>
+      <input placeholder="例）乙倉悠貴" matInput name="keyword" #keywordInput />
+      <button mat-icon-button matSuffix aria-label="登録">
+        <mat-icon> send </mat-icon>
+      </button>
+    </mat-form-field>
+  </form>
+</div>
 
-<div *ngIf="this.keyword && this.songs == undefined">
+<div *ngIf="this.searchType == 'songName' || this.searchType == 'none'">
+  <form (ngSubmit)="searchSongBySongName(songNameInput.value)">
+    <mat-form-field appearance="outline" floatLabel="always" style="width: 100%">
+      <mat-label>曲名を入力</mat-label>
+      <input placeholder="例）ずるじゃん" matInput name="songName" #songNameInput />
+      <button mat-icon-button matSuffix aria-label="登録">
+        <mat-icon> send </mat-icon>
+      </button>
+    </mat-form-field>
+  </form>
+</div>
+
+<div *ngIf="this.searchType != 'none' && this.songs == undefined">
   検索中<br>
   <mat-spinner></mat-spinner>
 </div>
 
-<div *ngIf="this.keyword && this.songs" class="song-list">
+<div *ngIf="this.searchType != 'none' && this.songs" class="song-list">
   <p>
-    「{{ this.keyword }}」を含む検索結果が{{ this.songs?.length }}件見つかりました。
+    <span *ngIf="this.searchType == 'keyword'">
+      キーワード「{{ this.keyword }}」
+    </span>
+    <span *ngIf="this.searchType == 'songName'">
+      曲名「{{ this.songName }}」
+    </span>
+    を含む検索結果が{{ this.songs?.length }}件見つかりました。
   </p>
   <ul>
     <li *ngFor="let song of this.songs">

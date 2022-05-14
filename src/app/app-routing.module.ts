@@ -11,6 +11,10 @@ const routes: Routes = [
     path: 'songs/keyword/:keyword',
     component: SongListComponent,
   },
+  {
+    path: 'songs/songName/:songName',
+    component: SongListComponent,
+  },
 ];
 
 @NgModule({

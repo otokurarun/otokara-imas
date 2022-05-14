@@ -26,4 +26,25 @@ export class SongsService {
     // 楽曲の配列を返す
     return songs;
   }
+
+  /**
+   * 指定された曲名から楽曲を取得
+   * @param songName 曲名
+   * @returns 楽曲の配列
+   */
+  async getSongsBySongName(songName: string) {
+    // バックエンドに対してリクエストを送信
+    const apiResponse = await fetch(`/api/songs/songName/${songName}`);
+
+    // リクエストに失敗した場合、エラーをスロー
+    if (!apiResponse.ok) {
+      throw apiResponse.status;
+    }
+
+    // レスポンスとして返されたjsonを配列に変換して、変数に代入
+    const songs = await apiResponse.json();
+
+    // 楽曲の配列を返す
+    return songs;
+  }
 }
