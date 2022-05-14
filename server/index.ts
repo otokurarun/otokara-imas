@@ -17,6 +17,11 @@ if (process.env['NODE_ENV'] && process.env['NODE_ENV'] === 'production') {
 import songsRouter from './routes/songs.route';
 app.use('/api/songs/', songsRouter);
 
+// 404対策
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../dist/otokara/index.html'));
+});
+
 // サーバを開始
 const server = app.listen(process.env['PORT'] || 8080, () => {
   const address = server.address() as AddressInfo;

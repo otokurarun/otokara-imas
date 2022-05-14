@@ -11,7 +11,7 @@ export class SongListComponent implements OnInit {
   // 楽曲の検索キーワード
   public keyword: string | undefined = undefined;
   // 取得した楽曲の配列
-  public songs: any[] = [];
+  public songs: any[] | undefined = undefined;
 
   constructor(
     private acivatedRoute: ActivatedRoute,
@@ -40,6 +40,7 @@ export class SongListComponent implements OnInit {
    */
   async searchSong(keyword: string) {
     this.keyword = keyword;
+    this.songs = undefined;
 
     // URLを「/songs/keyword/アイドルマスター」のように変更
     this.router.navigate(['songs', 'keyword', keyword]);
