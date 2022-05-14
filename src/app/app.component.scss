@@ -1,0 +1,19 @@
+.toolbar {
+  background-color: #F48FB1;
+
+  &__title {
+    margin: 0 auto;
+
+    >a {
+      color: white;
+      text-decoration: none;
+    }
+  }
+}
+
+.container {
+  box-sizing: content-box;
+  max-width: 1440px;
+  padding: 0 20px;
+  margin-top: 30px;
+}
