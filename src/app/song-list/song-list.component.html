@@ -22,9 +22,11 @@
   </form>
 </div>
 
-<div *ngIf="this.searchType != 'none' && this.songs == undefined">
-  検索中<br>
-  <mat-spinner></mat-spinner>
+<div class="search-loading" *ngIf="this.searchType != 'none' && this.songs == undefined">
+  検索中...<br>
+  <div class="moving-shoes-container">
+    <img class="moving-shoes" src="/assets/shoes.png" />
+  </div>
 </div>
 
 <div *ngIf="this.searchType != 'none' && this.songs" class="song-list">

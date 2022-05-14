@@ -1,0 +1,36 @@
+@keyframes moving-shoes {
+  0%,
+  100% {
+    transform: rotate(-10deg) translateY(0%) scale(0.9);
+  }
+  20% {
+    transform: rotate(-10deg) translateX(50%) translateY(30%) scale(1);
+  }
+  60% {
+    transform: rotate(-20deg) translateX(50%) translateY(50%) scale(1);
+  }
+  90% {
+    transform: rotate(20deg) translateX(-50%) translateY(-60%) scale(0.9);
+  }
+}
+
+.search-loading {
+  text-align: center;
+
+  .moving-shoes-container {
+    position: relative;
+    width: 200px;
+    height: 200px;
+    overflow: hidden;
+    margin: 0 auto;
+    text-align: initial;
+
+    .moving-shoes {
+      position: relative;
+      width: 50%;
+      animation: 0.6s cubic-bezier(0.46, 0.03, 0.52, 0.96) 0s infinite
+        moving-shoes;
+      opacity: 0.5;
+    }
+  }
+}
