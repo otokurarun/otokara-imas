@@ -1,19 +1,23 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { SongListComponent } from './song-list/song-list.component';
+import { SongSearchComponent } from './song-search/song-search.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: SongListComponent,
+    component: SongSearchComponent,
   },
   {
     path: 'songs/keyword/:keyword',
-    component: SongListComponent,
+    component: SongSearchComponent,
   },
   {
     path: 'songs/songName/:songName',
-    component: SongListComponent,
+    component: SongSearchComponent,
+  },
+  {
+    path: 'imasSongs/ranking/:rankingBrandName',
+    component: SongSearchComponent,
   },
 ];
 
