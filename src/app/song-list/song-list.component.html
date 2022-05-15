@@ -23,14 +23,38 @@
   </div>
 </div>
 
-<mat-card *ngFor="let song of this.songs" class="song-card">
-  <mat-card-title>{{ song.title }}</mat-card-title>
-  <mat-card-subtitle>{{ song.artist }}</mat-card-subtitle>
-  <mat-card-content>
-    {{ song | json }}
-  </mat-card-content>
-  <mat-card-actions align="end">
-    <button mat-button>詳細</button>
-    <button mat-button>お気に入り</button>
-  </mat-card-actions>
-</mat-card>
+<div class="song-list">
+  <mat-card *ngFor="let song of this.songs" class="song-card">
+    <mat-card-title>
+      <a
+        href="https://www.clubdam.com/karaokesearch/songleaf.html?requestNo={{
+          song.damRequestNo
+        }}"
+        target="_blank"
+        rel="noopener noreferrer"
+        mat-button
+        class="song-title"
+      >
+        {{ song.title }}
+      </a>
+    </mat-card-title>
+    <mat-card-subtitle>
+      {{ song.artist }}
+      <br />
+      DAM:&nbsp;{{ song.damRequestNo }}
+    </mat-card-subtitle>
+    <mat-card-actions align="end">
+      <a
+        href="https://www.clubdam.com/karaokesearch/songleaf.html?requestNo={{
+          song.damRequestNo
+        }}"
+        target="_blank"
+        rel="noopener noreferrer"
+        mat-button
+      >
+        詳細
+      </a>
+      <button mat-button>お気に入り</button>
+    </mat-card-actions>
+  </mat-card>
+</div>
