@@ -32,6 +32,8 @@ class Cron {
 
       console.log(`${song.title}を保存しました。`);
     }
+
+    console.log(`${songs.length}件の保存が完了しました。`);
   }
 
   /**
@@ -39,7 +41,7 @@ class Cron {
    * @param keyword keyword
    * @returns 楽曲の配列
    */
-  static async getSongsByKeyword(keyword: string) {
+  static async getSongsByKeyword(keyword: string, page = 1) {
     // Denmoku API についての定義
     const DENMOKU_SEARCH_API_ENDPOINT =
       'https://csgw.clubdam.com/dkwebsys/search-api';
@@ -53,7 +55,7 @@ class Cron {
       keyword: keyword,
       ondemandSearchPatternCode: '0',
       modelTypeCode: '3',
-      pageNo: '1',
+      pageNo: page,
       serialNo: 'AT00001', // 'AT00001' = LIVE DAM Ai, 'AF00001' = LIVE DAM, ...
       sort: '1', // '1' = 50音順、'2' = 人気順
     };
@@ -73,7 +75,13 @@ class Cron {
 
     // 検索結果を取得
     const result = await apiResponse.json();
-    const songs = result.list;
+    let songs = result.list;
+
+    if (result.data.hasNext == true && page < 5) {
+      // 次ページがあれば、次ページを取得 (ただし最大5ページまで)
+      const nextPageSongs = await Cron.getSongsByKeyword(keyword, page + 1);
+      songs = songs.concat(nextPageSongs);
+    }
 
     return songs;
   }
