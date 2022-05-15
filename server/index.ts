@@ -8,6 +8,9 @@ const app = express();
 import * as dotenv from 'dotenv';
 dotenv.config({ path: `${__dirname}/.env` });
 
+// Database接続を初期化
+import { AppDataSource } from './database';
+
 // ビルドされたangularアプリを静的ファイルとしてサーブ(本番用)
 if (process.env['NODE_ENV'] && process.env['NODE_ENV'] === 'production') {
   app.use(express.static(path.join(__dirname, '../dist/otokara/')));
@@ -22,10 +25,16 @@ app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, '../dist/otokara/index.html'));
 });
 
-// サーバを開始
-const server = app.listen(process.env['PORT'] || 8080, () => {
-  const address = server.address() as AddressInfo;
-  const host = address.address;
-  const port = address.port;
-  console.log('server listening on port %s:%s', host, port);
-});
+// 非同期処理を実行
+(async () => {
+  // データベースの接続完了まで待機
+  await AppDataSource.initialize();
+
+  // サーバを開始
+  const server = app.listen(process.env['PORT'] || 8080, () => {
+    const address = server.address() as AddressInfo;
+    const host = address.address;
+    const port = address.port;
+    console.log('server listening on port %s:%s', host, port);
+  });
+})();
