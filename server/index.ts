@@ -19,6 +19,8 @@ if (process.env['NODE_ENV'] && process.env['NODE_ENV'] === 'production') {
 // ルートを定義
 import songsRouter from './routes/songs.route';
 app.use('/api/songs/', songsRouter);
+import imasSongsRouter from './routes/imas-songs.route';
+app.use('/api/imasSongs/', imasSongsRouter);
 
 // 404対策
 app.get('*', (req, res) => {

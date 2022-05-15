@@ -34,4 +34,7 @@ export class KaraokeSong {
     type: 'int',
   })
   damRank?: number;
+
+  @Column()
+  brand: string;
 }

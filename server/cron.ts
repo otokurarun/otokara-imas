@@ -31,6 +31,7 @@ class Cron {
         damReleaseDate: song.releaseDate,
         damRequestNo: song.requestNo,
         damRank: rankCount,
+        brand: 'cg',
       });
 
       console.log(`${song.title}を保存しました。`);
