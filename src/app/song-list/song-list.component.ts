@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { DomSanitizer } from '@angular/platform-browser';
 import { SongsService } from '../songs.service';
 
 @Component({
@@ -14,6 +15,7 @@ export class SongListComponent implements OnInit {
   @Input()
   public searchType: 'keyword' | 'songName' | 'ranking' | 'none' = 'none';
 
+  // 楽曲の検索パラメータ
   @Input()
   public searchParams: {
     keyword?: string;
@@ -21,7 +23,10 @@ export class SongListComponent implements OnInit {
     brandName?: string;
   };
 
-  constructor(public songsService: SongsService) {}
+  constructor(
+    public songsService: SongsService,
+    private sanitizer: DomSanitizer
+  ) {}
 
   /**
    * コンポーネントが初期化されたときの処理
@@ -30,6 +35,9 @@ export class SongListComponent implements OnInit {
     await this.search();
   }
 
+  /**
+   * 楽曲の検索パラメータによって検索処理を実行
+   */
   public async search() {
     // キーワードがあれば、楽曲の検索処理を実行
     if (this.searchParams.keyword) {
@@ -53,7 +61,18 @@ export class SongListComponent implements OnInit {
     }
   }
 
+  /**
+   * デンモクアプリを起動するためのURLの取得
+   * @param song 楽曲の配列
+   * @returns デンモクアプリを起動するためのURL
+   */
   public getReserveIntentUrl(song: { damRequestNo: string }) {
-    return `denmoku://reserve?reqno=${song.damRequestNo.replace(/-/g, '')}`;
+    const intentUrl = `denmoku://reserve?reqno=${song.damRequestNo.replace(
+      /-/g,
+      ''
+    )}`;
+
+    // 信頼のできるURLとしてマークして返す
+    return this.sanitizer.bypassSecurityTrustUrl(intentUrl);
   }
 }
