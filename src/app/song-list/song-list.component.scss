@@ -34,3 +34,13 @@
     }
   }
 }
+
+.song-list {
+  .song-card {
+    margin-top: 20px;
+
+    &+.song-card {
+      margin-top: 30px;
+    }
+  }
+}
