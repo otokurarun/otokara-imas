@@ -1,11 +1,36 @@
-  <mat-card *ngFor="let song of this.songs" class="song-card">
-    <mat-card-title>{{ song.title }}</mat-card-title>
-    <mat-card-subtitle>{{ song.artist }}</mat-card-subtitle>
-    <mat-card-content>
-      {{ song|json }}
-    </mat-card-content>
-    <mat-card-actions align="end">
-      <button mat-button>詳細</button>
-      <button mat-button>お気に入り</button>
-    </mat-card-actions>
-  </mat-card>
+<div *ngIf="this.searchType != 'none' && this.songs" class="song-list">
+  <p>
+    <span *ngIf="this.searchType == 'keyword'">
+      キーワード「{{ this.searchParams.keyword }}」 を含む検索結果が{{
+        this.songs?.length
+      }}件見つかりました。
+    </span>
+    <span *ngIf="this.searchType == 'songName'">
+      曲名「{{ this.searchParams.songName }}」 を含む検索結果が{{
+        this.songs?.length
+      }}件見つかりました。
+    </span>
+  </p>
+</div>
+
+<div
+  class="search-loading"
+  *ngIf="this.searchType != 'none' && this.songs == undefined"
+>
+  検索中...<br />
+  <div class="moving-shoes-container">
+    <img class="moving-shoes" src="/assets/shoes.png" />
+  </div>
+</div>
+
+<mat-card *ngFor="let song of this.songs" class="song-card">
+  <mat-card-title>{{ song.title }}</mat-card-title>
+  <mat-card-subtitle>{{ song.artist }}</mat-card-subtitle>
+  <mat-card-content>
+    {{ song | json }}
+  </mat-card-content>
+  <mat-card-actions align="end">
+    <button mat-button>詳細</button>
+    <button mat-button>お気に入り</button>
+  </mat-card-actions>
+</mat-card>

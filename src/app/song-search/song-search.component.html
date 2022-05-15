@@ -1,6 +1,11 @@
+<!-- TOPページ用キーワード検索欄 -->
 <div *ngIf="this.searchType == 'keyword' || this.searchType == 'none'">
   <form (ngSubmit)="searchSongByKeyword(keywordInput.value)">
-    <mat-form-field appearance="outline" floatLabel="always" style="width: 100%">
+    <mat-form-field
+      appearance="outline"
+      floatLabel="always"
+      style="width: 100%"
+    >
       <mat-label>キーワードを入力</mat-label>
       <input placeholder="例）乙倉悠貴" matInput name="keyword" #keywordInput />
       <button mat-icon-button matSuffix aria-label="登録">
@@ -10,11 +15,21 @@
   </form>
 </div>
 
+<!-- TOPページ用曲名検索欄 -->
 <div *ngIf="this.searchType == 'songName' || this.searchType == 'none'">
   <form (ngSubmit)="searchSongBySongName(songNameInput.value)">
-    <mat-form-field appearance="outline" floatLabel="always" style="width: 100%">
+    <mat-form-field
+      appearance="outline"
+      floatLabel="always"
+      style="width: 100%"
+    >
       <mat-label>曲名を入力</mat-label>
-      <input placeholder="例）ずるじゃん" matInput name="songName" #songNameInput />
+      <input
+        placeholder="例）ずるじゃん"
+        matInput
+        name="songName"
+        #songNameInput
+      />
       <button mat-icon-button matSuffix aria-label="登録">
         <mat-icon> send </mat-icon>
       </button>
@@ -22,23 +37,42 @@
   </form>
 </div>
 
-<div class="search-loading" *ngIf="this.searchType != 'none' && this.songs == undefined">
-  検索中...<br>
-  <div class="moving-shoes-container">
-    <img class="moving-shoes" src="/assets/shoes.png" />
-  </div>
-</div>
+<!-- 検索結果 -->
+<ng-container *ngIf="this.searchType != 'none'">
+  <app-song-list
+    [searchType]="this.searchType"
+    [searchParams]="this.searchParams"
+    #searchResultList
+  ></app-song-list>
+</ng-container>
 
-<div *ngIf="this.searchType != 'none' && this.songs" class="song-list">
-  <p>
-    <span *ngIf="this.searchType == 'keyword'">
-      キーワード「{{ this.keyword }}」
-      を含む検索結果が{{ this.songs?.length }}件見つかりました。
-    </span>
-    <span *ngIf="this.searchType == 'songName'">
-      曲名「{{ this.songName }}」
-      を含む検索結果が{{ this.songs?.length }}件見つかりました。
-    </span>
-  </p>
-  <app-song-list [songs]="this.songs"></app-song-list>
-</div>
+<!-- TOPページ用ランキング -->
+<mat-tab-group *ngIf="this.searchType == 'none'">
+  <!-- シンデレラガールズのランキング -->
+  <mat-tab>
+    <ng-template mat-tab-label> デレ </ng-template>
+    <app-song-list
+      searchType="ranking"
+      [searchParams]="{ brandName: 'cg' }"
+    ></app-song-list>
+  </mat-tab>
+  <!-- シャイニーカラーズのランキング -->
+  <mat-tab>
+    <ng-template mat-tab-label> シャニ </ng-template>
+  </mat-tab>
+  <!-- ミリオンライブのランキング -->
+  <mat-tab>
+    <ng-template mat-tab-label> ミリ </ng-template>
+    今後対応予定です。
+  </mat-tab>
+  <!-- 765ASのランキング -->
+  <mat-tab>
+    <ng-template mat-tab-label> 765AS </ng-template>
+    今後対応予定です。
+  </mat-tab>
+  <!-- sideMのランキング -->
+  <mat-tab>
+    <ng-template mat-tab-label> エムマス </ng-template>
+    今後対応予定です。
+  </mat-tab>
+</mat-tab-group>
