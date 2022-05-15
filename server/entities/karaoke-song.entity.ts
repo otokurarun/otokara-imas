@@ -28,4 +28,10 @@ export class KaraokeSong {
     type: 'int',
   })
   damPlaybackTime?: number;
+
+  @Column({
+    nullable: true,
+    type: 'int',
+  })
+  damRank?: number;
 }

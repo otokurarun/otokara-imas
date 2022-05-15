@@ -17,6 +17,8 @@ class Cron {
       'アイドルマスターシンデレラガールズ'
     );
 
+    let rankCount: number = 1;
+
     // 楽曲情報をDBに保存
     for (let song of songs) {
       await KaraokeSongRepository.save({
@@ -28,9 +30,12 @@ class Cron {
         damPlaybackTime: song.playbackTime,
         damReleaseDate: song.releaseDate,
         damRequestNo: song.requestNo,
+        damRank: rankCount,
       });
 
       console.log(`${song.title}を保存しました。`);
+
+      rankCount++;
     }
 
     console.log(`${songs.length}件の保存が完了しました。`);
@@ -57,7 +62,7 @@ class Cron {
       modelTypeCode: '3',
       pageNo: page,
       serialNo: 'AT00001', // 'AT00001' = LIVE DAM Ai, 'AF00001' = LIVE DAM, ...
-      sort: '1', // '1' = 50音順、'2' = 人気順
+      sort: '2', // '1' = 50音順、'2' = 人気順
     };
 
     const apiResponse = await fetch(requestUrl, {
