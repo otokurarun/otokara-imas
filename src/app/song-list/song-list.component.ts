@@ -13,7 +13,11 @@ export class SongListComponent implements OnInit {
 
   // 楽曲の検索タイプ
   @Input()
-  public searchType: 'keyword' | 'songName' | 'ranking' | 'none' = 'none';
+  public searchType: 'keyword' | 'songName' | 'all' | 'none' = 'none';
+
+  // 楽曲の並び替えタイプ
+  @Input()
+  public sortType: 'popular' | 'newer' | 'alphabetical' = 'popular';
 
   // 楽曲の検索パラメータ
   @Input()
@@ -58,6 +62,34 @@ export class SongListComponent implements OnInit {
       this.songs = await this.songsService.getImasSongsByBrandName(
         this.searchParams.brandName
       );
+    }
+
+    if (!this.songs) {
+      return;
+    }
+
+    // 配信が新しい順にソート
+    if (this.sortType == 'newer') {
+      this.songs.sort((a, b) => {
+        if (!a.damReleaseDate) return -1;
+        if (!b.damReleaseDate) return 1;
+        if (
+          new Date(b.damReleaseDate).getTime() <
+          new Date(a.damReleaseDate).getTime()
+        )
+          return -1;
+        if (
+          new Date(b.damReleaseDate).getTime() >
+          new Date(a.damReleaseDate).getTime()
+        )
+          return 1;
+        return 0;
+      });
+    }
+
+    // 50音順にソート
+    if (this.sortType == 'alphabetical') {
+      this.songs.sort((a, b) => a.titleYomi.localeCompare(b.titleYomi, 'ja'));
     }
   }
 

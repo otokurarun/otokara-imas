@@ -10,7 +10,10 @@ import { SongsService } from '../songs.service';
 })
 export class SongSearchComponent implements OnInit {
   // 楽曲の検索タイプ
-  public searchType: 'keyword' | 'songName' | 'ranking' | 'none' = 'none';
+  public searchType: 'keyword' | 'songName' | 'all' | 'none' = 'none';
+
+  // 楽曲の並び替えタイプ
+  public sortType: 'popular' | 'newer' | 'alphabetical' = 'popular';
 
   public searchParams: {
     keyword?: string;
@@ -52,7 +55,7 @@ export class SongSearchComponent implements OnInit {
     } else if (this.searchParams.songName) {
       this.searchType = 'songName';
     } else if (this.searchParams.brandName) {
-      this.searchType = 'ranking';
+      this.searchType = 'all';
     } else {
       this.searchType = 'none';
     }

@@ -46,34 +46,43 @@
   ></app-song-list>
 </ng-container>
 
-<!-- TOPページ用ランキング -->
-<mat-tab-group *ngIf="this.searchType == 'none'">
-  <!-- シンデレラガールズのランキング -->
+<!-- TOPページ用楽曲リスト -->
+<mat-tab-group *ngIf="this.searchType == 'none'" mat-align-tabs="end">
+  <!-- 人気順の楽曲リスト -->
   <mat-tab>
-    <ng-template mat-tab-label> デレ </ng-template>
+    <ng-template mat-tab-label>
+      <mat-icon>show_chart</mat-icon>
+    </ng-template>
     <app-song-list
-      searchType="ranking"
+      searchType="all"
       [searchParams]="{ brandName: 'cg' }"
+      sortType="popular"
     ></app-song-list>
   </mat-tab>
-  <!-- シャイニーカラーズのランキング -->
+
+  <!-- 新着順の楽曲リスト -->
   <mat-tab>
-    <ng-template mat-tab-label> シャニ </ng-template>
-    今後対応予定です。
+    <ng-template mat-tab-label>
+      <mat-icon>event</mat-icon>
+    </ng-template>
+
+    <app-song-list
+      searchType="all"
+      [searchParams]="{ brandName: 'cg' }"
+      sortType="newer"
+    ></app-song-list>
   </mat-tab>
-  <!-- ミリオンライブのランキング -->
+
+  <!-- 50音順の楽曲リスト -->
   <mat-tab>
-    <ng-template mat-tab-label> ミリ </ng-template>
-    今後対応予定です。
-  </mat-tab>
-  <!-- 765ASのランキング -->
-  <mat-tab>
-    <ng-template mat-tab-label> 765AS </ng-template>
-    今後対応予定です。
-  </mat-tab>
-  <!-- sideMのランキング -->
-  <mat-tab>
-    <ng-template mat-tab-label> エムマス </ng-template>
-    今後対応予定です。
+    <ng-template mat-tab-label>
+      <mat-icon>sort_by_alpha</mat-icon>
+    </ng-template>
+
+    <app-song-list
+      searchType="all"
+      [searchParams]="{ brandName: 'cg' }"
+      sortType="alphabetical"
+    ></app-song-list>
   </mat-tab>
 </mat-tab-group>
