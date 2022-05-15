@@ -1,10 +1,7 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { Entity, Column, PrimaryColumn } from 'typeorm';
 
 @Entity()
 export class KaraokeSong {
-  @PrimaryGeneratedColumn()
-  id: number;
-
   @Column()
   title: string;
 
@@ -17,7 +14,7 @@ export class KaraokeSong {
   @Column()
   artistYomi: string;
 
-  @Column()
+  @PrimaryColumn()
   damRequestNo: string;
 
   @Column()
@@ -26,6 +23,9 @@ export class KaraokeSong {
   @Column()
   damReleaseDate: string;
 
-  @Column()
-  damPlaybackTime: number;
+  @Column({
+    nullable: true,
+    type: 'int',
+  })
+  damPlaybackTime?: number;
 }

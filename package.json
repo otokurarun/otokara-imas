@@ -9,7 +9,8 @@
     "start-server": "ts-node-dev --respawn --project tsconfig.server.json server/index.ts",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "cron": "ts-node --project tsconfig.server.json --transpile-only server/cron.ts"
   },
   "private": true,
   "dependencies": {
