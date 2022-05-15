@@ -37,12 +37,23 @@
         {{ song.title }}
       </a>
     </mat-card-title>
+
     <mat-card-subtitle>
       {{ song.artist }}
       <br />
       DAM:&nbsp;{{ song.damRequestNo }}
     </mat-card-subtitle>
+
     <mat-card-actions align="end">
+      <a
+        [href]="this.getReserveIntentUrl(song)"
+        target="_blank"
+        rel="noopener noreferrer"
+        mat-button
+      >
+        予約
+      </a>
+
       <a
         href="https://www.clubdam.com/karaokesearch/songleaf.html?requestNo={{
           song.damRequestNo

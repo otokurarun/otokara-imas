@@ -52,4 +52,8 @@ export class SongListComponent implements OnInit {
       );
     }
   }
+
+  public getReserveIntentUrl(song: { damRequestNo: string }) {
+    return `denmoku://reserve?reqno=${song.damRequestNo.replace(/-/g, '')}`;
+  }
 }

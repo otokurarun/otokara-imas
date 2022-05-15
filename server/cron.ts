@@ -17,6 +17,7 @@ class Cron {
       'アイドルマスターシンデレラガールズ'
     );
 
+    // 人気順位を初期化
     let rankCount: number = 1;
 
     // 楽曲情報をDBに保存
