@@ -96,15 +96,26 @@ export class SongListComponent implements OnInit {
   /**
    * デンモクアプリを起動するためのURLの取得
    * @param song 楽曲の配列
-   * @returns デンモクアプリを起動するためのURL
+   * @returns デンモクアプリを起動するためのURL (ただし、PCの場合は公式WebサイトのURL)
    */
   public getReserveIntentUrl(song: { damRequestNo: string }) {
-    const intentUrl = `denmoku://reserve?reqno=${song.damRequestNo.replace(
-      /-/g,
-      ''
-    )}`;
+    // URLを生成
+    let url: string;
+    if (navigator.userAgent.match(/(iPhone|iPad)/)) {
+      // iOS
+      url = `denmoku://reserve?reqno=${song.damRequestNo.replace(/-/g, '')}`;
+    } else if (navigator.userAgent.match(/Android/)) {
+      // Android
+      url = `intent://reserve/?reqno=${song.damRequestNo.replace(
+        /-/g,
+        ''
+      )}#Intent;scheme=denmoku;package=jp.co.dkkaraoke.denmokumini01;end;`;
+    } else {
+      // その他
+      url = `https://www.clubdam.com/karaokesearch/songleaf.html?requestNo=${song.damRequestNo}`;
+    }
 
     // 信頼のできるURLとしてマークして返す
-    return this.sanitizer.bypassSecurityTrustUrl(intentUrl);
+    return this.sanitizer.bypassSecurityTrustUrl(url);
   }
 }
