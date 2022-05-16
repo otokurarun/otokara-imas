@@ -13,7 +13,7 @@ export class SongsService {
    */
   async getSongsByKeyword(keyword: string) {
     // バックエンドに対してリクエストを送信
-    const apiResponse = await fetch(`/api/songs/keyword/${keyword}`);
+    const apiResponse = await fetch(`/api/imasSongs/keyword/${keyword}`);
 
     // リクエストに失敗した場合、エラーをスロー
     if (!apiResponse.ok) {
@@ -34,7 +34,7 @@ export class SongsService {
    */
   async getSongsBySongName(songName: string) {
     // バックエンドに対してリクエストを送信
-    const apiResponse = await fetch(`/api/songs/songName/${songName}`);
+    const apiResponse = await fetch(`/api/imasSongs/songName/${songName}`);
 
     // リクエストに失敗した場合、エラーをスロー
     if (!apiResponse.ok) {
@@ -53,7 +53,7 @@ export class SongsService {
    * @param brandName ブランド名
    * @returns 楽曲の配列
    */
-  async getImasSongsByBrandName(brandName: string) {
+  async getSongsByBrandName(brandName: string) {
     // バックエンドに対してリクエストを送信
     const apiResponse = await fetch(`/api/imasSongs/ranking/${brandName}`);
 

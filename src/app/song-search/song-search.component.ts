@@ -68,8 +68,8 @@ export class SongSearchComponent implements OnInit {
   async searchSongBySongName(songName: string) {
     this.searchParams.songName = songName;
 
-    // URLを「/songs/songName/アイドルマスター」のように変更
-    this.router.navigate(['songs', 'songName', songName]);
+    // URLを「/imasSongs/songName/アイドルマスター」のように変更
+    this.router.navigate(['imasSongs', 'songName', songName]);
 
     // 検索を実行
     this.searchResultList.search();
@@ -82,8 +82,8 @@ export class SongSearchComponent implements OnInit {
   async searchSongByKeyword(keyword: string) {
     this.searchParams.keyword = keyword;
 
-    // URLを「/songs/keyword/アイドルマスター」のように変更
-    this.router.navigate(['songs', 'keyword', keyword]);
+    // URLを「/imasSongs/keyword/アイドルマスター」のように変更
+    this.router.navigate(['imasSongs', 'keyword', keyword]);
 
     // 検索を実行
     this.searchResultList.search();

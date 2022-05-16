@@ -8,11 +8,11 @@ const routes: Routes = [
     component: SongSearchComponent,
   },
   {
-    path: 'songs/keyword/:keyword',
+    path: 'imasSongs/keyword/:keyword',
     component: SongSearchComponent,
   },
   {
-    path: 'songs/songName/:songName',
+    path: 'imasSongs/songName/:songName',
     component: SongSearchComponent,
   },
   {

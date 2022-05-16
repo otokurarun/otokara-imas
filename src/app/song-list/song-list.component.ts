@@ -59,7 +59,7 @@ export class SongListComponent implements OnInit {
 
     // ブランド名があれば、楽曲の検索処理を実行
     if (this.searchParams.brandName) {
-      this.songs = await this.songsService.getImasSongsByBrandName(
+      this.songs = await this.songsService.getSongsByBrandName(
         this.searchParams.brandName
       );
     }
