@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg width="512" height="512" viewBox="0 0 135.46667 135.46667" version="1.1" id="svg5" inkscape:version="1.1.2 (b8e25be8, 2022-02-05)" sodipodi:docname="icon-32.svg" inkscape:export-xdpi="6.0000005" inkscape:export-ydpi="6.0000005" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview id="namedview7" pagecolor="#ffffff" bordercolor="#666666" borderopacity="1.0" inkscape:pageshadow="2" inkscape:pageopacity="0.0" inkscape:pagecheckerboard="0" inkscape:document-units="mm" showgrid="false" units="px" inkscape:zoom="0.125" inkscape:cx="-508" inkscape:cy="1588" inkscape:window-width="1440" inkscape:window-height="771" inkscape:window-x="0" inkscape:window-y="25" inkscape:window-maximized="1" inkscape:current-layer="layer1" borderlayer="true" />
+  <defs id="defs2">
+    <rect x="124.35923" y="237.05978" width="46.63471" height="169.69853" id="rect8554" />
+  </defs>
+  <g inkscape:label="Layer 1" inkscape:groupmode="layer" id="layer1">
+    <rect style="fill:#ffffff;stroke:#ffffff;stroke-width:2.57;stroke-linejoin:round;stop-color:#000000" id="rect11671" width="142.92404" height="143.60953" x="-3.7701788" y="-1.7137177" sodipodi:insensitive="true" />
+    <rect style="fill:#fffdfd;fill-opacity:1;stroke:none;stroke-width:1.20002;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;stop-color:#000000" id="rect14630" width="67.733002" height="67.73333" x="67.733658" y="0" />
+    <path id="rect14630-2" style="fill:#e6a2a3;fill-opacity:1;stroke-width:2.55754;stroke-linejoin:round;stop-color:#000000" d="M -16.531339,8.6057929 132.47526,0 c -178.044839,130.85572 -78.365142,140.56614 2.27243,121.14312 0,0 25.54388,30.02082 -19.24375,40.04863 C 72.594192,170.7991 -42.760427,154.37419 -19.706886,126.54991 44.355933,49.229795 107.27235,9.4354245 107.27235,9.4354245 53.105592,7.7386449 -1.0611707,12.661708 -12.522643,15.267827 Z" sodipodi:nodetypes="cccssccc" />
+    <g id="g14978" transform="matrix(1.0402697,0.13498378,-0.13498378,1.0402697,62.988948,-3.8050559)" style="fill:#e49799;fill-opacity:1;stroke:#e49799;stroke-opacity:1">
+      <ellipse style="fill:#eb7f82;fill-opacity:1;stroke:#ed8e90;stroke-width:0.210664;stroke-opacity:1;-inkscape-stroke:none;stop-color:#000000" id="path2978" cx="-0.3712317" cy="108.88255" rx="18.971701" ry="9.9472227" transform="rotate(-17.741048)" />
+      <path style="fill:#eb7f82;fill-opacity:1;stroke:#eb7f82;stroke-width:3.81319;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" d="m 49.382837,100.4002 v -5.463789 -7.21717 l 0,-49.365374 0,-11.692431 c 0,0 0.0018,0.57919 0.690478,1.046553 27.119453,18.403558 11.604852,43.08096 11.604852,43.08096 6.390006,-17.13401 -5.714924,-34.056583 -11.345204,-32.092248 -0.247723,0.08643 -0.714382,-0.226774 -0.950126,-0.342834" id="path973" sodipodi:nodetypes="cccccscsc" />
+    </g>
+    <g id="g14978-1" transform="matrix(0.60708336,0.0787742,-0.0787742,0.60708336,11.886601,-1.8804257)" style="opacity:0.242634;fill:#f2c0c1;fill-opacity:1;stroke:#f2c0c1;stroke-opacity:1" />
+    <text xml:space="preserve" style="font-style:normal;font-weight:normal;font-size:50.8px;line-height:1.25;font-family:sans-serif;fill:#f2c0c1;fill-opacity:1;stroke:none;stroke-width:1.02723" x="76.174759" y="53.559975" id="text30993-4-6">
+      <tspan sodipodi:role="line" id="tspan30991-8-43" style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:50.8px;font-family:Herculanum;-inkscape-font-specification:'Herculanum, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#f2c0c1;fill-opacity:1;stroke-width:1.02723" x="76.174759" y="53.559975" />
+      <tspan sodipodi:role="line" style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:50.8px;font-family:'PingFang TC';-inkscape-font-specification:'PingFang TC, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#f2c0c1;fill-opacity:1;stroke-width:1.02723" x="76.174759" y="117.05997" id="tspan33089-3-8" />
+    </text>
+    <text xml:space="preserve" transform="scale(0.26458333)" id="text8552" style="fill:black;fill-opacity:1;line-height:1.25;stroke:none;font-family:sans-serif;font-style:normal;font-weight:normal;font-size:40px;white-space:pre;shape-inside:url(#rect8554)" />
+  </g>
+</svg>
