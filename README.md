@@ -1,10 +1,14 @@
 # Otokara
 
+![Otokara Icon](https://raw.githubusercontent.com/tkamada022/otokara/0879a69925be5b267df8ef198e52177dc57ce06a/src/apple-touch-icon.png)
+
+---
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.3.5.
 
 ## Development server
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+Run `npm start` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
 
 ## Code scaffolding
 

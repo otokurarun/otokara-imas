@@ -28,6 +28,10 @@
             "inlineStyleLanguage": "scss",
             "assets": [
               "src/favicon.ico",
+              "src/apple-touch-icon.png",
+              "src/apple-touch-icon-76x76.png",
+              "src/icon-512.png",
+              "src/icon-192.png",
               "src/assets"
             ],
             "styles": [
@@ -97,6 +101,10 @@
             "inlineStyleLanguage": "scss",
             "assets": [
               "src/favicon.ico",
+              "src/apple-touch-icon.png",
+              "src/apple-touch-icon-76x76.png",
+              "src/icon-512.png",
+              "src/icon-192.png",
               "src/assets"
             ],
             "styles": [
