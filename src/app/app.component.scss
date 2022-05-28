@@ -1,15 +1,15 @@
 .toolbar {
-  background-color: #F48FB1;
+  background-color: #f48fb1;
 
   &__title {
     margin: 0 auto;
     font-size: 1.6rem;
 
-    @media screen and (max-width:767px) {
+    @media screen and (max-width: 767px) {
       font-size: 1.5rem;
     }
 
-    >a {
+    > a {
       color: white;
       text-decoration: none;
     }
@@ -17,6 +17,10 @@
     &--small {
       font-size: 0.5em;
     }
+  }
+
+  .info-icon {
+    color: white;
   }
 }
 

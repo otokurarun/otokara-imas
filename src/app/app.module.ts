@@ -10,9 +10,10 @@ import { SongListComponent } from './song-list/song-list.component';
 import { MaterialModule } from '../material.module';
 import { SongSearchComponent } from './song-search/song-search.component';
 import { LiveEventListComponent } from './live-event-list/live-event-list.component';
+import { InfoComponent } from './info/info.component';
 
 @NgModule({
-  declarations: [AppComponent, SongListComponent, SongSearchComponent, LiveEventListComponent],
+  declarations: [AppComponent, SongListComponent, SongSearchComponent, LiveEventListComponent, InfoComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
