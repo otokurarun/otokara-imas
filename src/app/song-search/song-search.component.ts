@@ -10,7 +10,8 @@ import { SongsService } from '../songs.service';
 })
 export class SongSearchComponent implements OnInit {
   // 楽曲の検索タイプ
-  public searchType: 'keyword' | 'songName' | 'all' | 'none' = 'none';
+  public searchType: 'keyword' | 'songName' | 'liveEvent' | 'all' | 'none' =
+    'none';
 
   // 楽曲の並び替えタイプ
   public sortType: 'popular' | 'newer' | 'alphabetical' = 'popular';
@@ -19,6 +20,7 @@ export class SongSearchComponent implements OnInit {
     keyword?: string;
     songName?: string;
     brandName?: string;
+    liveEventId?: number;
   } = {};
 
   @ViewChild('searchResultList')
@@ -40,6 +42,14 @@ export class SongSearchComponent implements OnInit {
       .get('songName')
       ?.toString();
 
+    // URLからライブイベントのIDを取得
+    if (this.acivatedRoute.snapshot.paramMap.get('liveEventId')) {
+      this.searchParams.liveEventId = parseInt(
+        this.acivatedRoute.snapshot.paramMap.get('liveEventId')!.toString(),
+        10
+      );
+    }
+
     // URLからブランド名を取得
     if (
       this.acivatedRoute.snapshot.paramMap
@@ -54,6 +64,8 @@ export class SongSearchComponent implements OnInit {
       this.searchType = 'keyword';
     } else if (this.searchParams.songName) {
       this.searchType = 'songName';
+    } else if (this.searchParams.liveEventId) {
+      this.searchType = 'liveEvent';
     } else if (this.searchParams.brandName) {
       this.searchType = 'all';
     } else {

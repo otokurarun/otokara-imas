@@ -19,6 +19,10 @@ const routes: Routes = [
     path: 'imasSongs/ranking/:rankingBrandName',
     component: SongSearchComponent,
   },
+  {
+    path: 'imasSongs/liveEvent/:liveEventId',
+    component: SongSearchComponent,
+  },
 ];
 
 @NgModule({

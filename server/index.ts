@@ -21,6 +21,8 @@ import songsRouter from './routes/songs.route';
 app.use('/api/songs/', songsRouter);
 import imasSongsRouter from './routes/imas-songs.route';
 app.use('/api/imasSongs/', imasSongsRouter);
+import imasLiveEventsRouter from './routes/imas-live-events.route';
+app.use('/api/imasLiveEvents/', imasLiveEventsRouter);
 
 // 404対策
 app.get('*', (req, res) => {

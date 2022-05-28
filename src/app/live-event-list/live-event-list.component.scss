@@ -1,0 +1,26 @@
+.live-event-card {
+  margin-top: 20px;
+
+  & + .live-event-card {
+    margin-top: 30px;
+  }
+
+  .live-event-title {
+    color: #333;
+    padding: 0;
+    text-decoration: none;
+    display: block;
+    width: 100%;
+    /* 三点リーダー対応 */
+    overflow-x: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    line-height: initial;
+    direction: rtl;
+    text-align: left;
+
+    &:hover {
+      opacity: 0.7;
+    }
+  }
+}

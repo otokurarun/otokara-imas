@@ -1,0 +1,14 @@
+<mat-card *ngFor="let liveEvent of this.liveEvents" class="live-event-card">
+  <mat-card-title>
+    <a
+      routerLink="imasSongs/liveEvent/{{ this.liveEvent.id }}"
+      class="live-event-title"
+    >
+      {{ liveEvent.title }}
+    </a>
+  </mat-card-title>
+
+  <mat-card-subtitle>
+    {{ liveEvent.date }}
+  </mat-card-subtitle>
+</mat-card>

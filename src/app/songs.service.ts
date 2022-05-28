@@ -68,4 +68,54 @@ export class SongsService {
     // 楽曲の配列を返す
     return songs;
   }
+
+  /**
+   * 指定されたライブイベントをセトリ順に楽曲を取得
+   * @param liveEventId ライブイベントのID
+   * @returns 楽曲の配列
+   */
+  async getSongsByLiveEventId(liveEventId: number) {
+    // バックエンドに対してリクエストを送信
+    const apiResponse = await fetch(`/api/imasSongs/liveEvent/${liveEventId}`);
+
+    // リクエストに失敗した場合、エラーをスロー
+    if (!apiResponse.ok) {
+      throw apiResponse.status;
+    }
+
+    // レスポンスとして返されたjsonを配列に変換して、変数に代入
+    const songs = await apiResponse.json();
+
+    // 楽曲の配列を返す
+    return songs;
+  }
+
+  /**
+   * 指定されたブランド名でライブ情報を取得
+   * @param brandName ブランド名
+   * @returns ライブ情報の配列
+   */
+  async getLiveEventsByBrandName(brandName: string) {
+    // バックエンドに対してリクエストを送信
+    const apiResponse = await fetch(`/api/imasLiveEvents/${brandName}`);
+
+    // リクエストに失敗した場合、エラーをスロー
+    if (!apiResponse.ok) {
+      throw apiResponse.status;
+    }
+
+    // レスポンスとして返されたjsonを配列に変換して、変数に代入
+    let liveEvents = await apiResponse.json();
+
+    liveEvents = liveEvents.map((liveEvent: any) => {
+      liveEvent.title = liveEvent.title.replace(
+        /THE IDOLM@STER CINDERELLA GIRLS /,
+        ''
+      );
+      return liveEvent;
+    });
+
+    // 楽曲の配列を返す
+    return liveEvents;
+  }
 }
