@@ -73,27 +73,43 @@ imasSongsRouter.get(
       return res.send([]);
     }
 
-    let karaokeSongs: any[] = [];
+    // where条件を初期化
+    let wheres = [];
 
     for (const liveSong of liveEvent.songs) {
       if (!liveSong.damRequestNo) {
         continue;
       }
 
-      const karaokeSong = await KaraokeSongRepository.findOne({
-        where: {
-          damRequestNo: liveSong.damRequestNo,
-        },
+      // where条件にDAMリクエスト番号を追加
+      wheres.push({
+        damRequestNo: liveSong.damRequestNo,
       });
-
-      if (karaokeSong === null) {
-        continue;
-      }
-
-      karaokeSongs.push(karaokeSong);
     }
 
-    res.send(karaokeSongs);
+    if (wheres.length === 0) {
+      return res.send([]);
+    }
+
+    // DAMリクエスト番号を元にカラオケ曲を取得
+    const karaokeSongs = await KaraokeSongRepository.find({
+      where: wheres,
+    });
+
+    let sortedKaraokeSongs: any[] = [];
+
+    // ライブのセトリ順に並び替え
+    for (const liveSong of liveEvent.songs) {
+      let karaokeSong = karaokeSongs.find(
+        (karaokeSong) => karaokeSong.damRequestNo === liveSong.damRequestNo
+      );
+      if (karaokeSong) {
+        sortedKaraokeSongs.push(karaokeSong);
+      }
+    }
+
+    // 並び替えた結果をレスポンスとして返す
+    res.send(sortedKaraokeSongs);
   }
 );
 

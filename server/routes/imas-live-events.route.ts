@@ -13,6 +13,7 @@ imasLiveEventsRouter.get('/:brandName', async (req, res) => {
   const result = await LiveEventRepository.find({
     where: { brandName: req.params.brandName },
     select: ['id', 'title', 'date', 'brandName'],
+    order: { date: 'desc' },
   });
 
   res.send(result);

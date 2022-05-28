@@ -105,7 +105,15 @@ export class SongsService {
     }
 
     // レスポンスとして返されたjsonを配列に変換して、変数に代入
-    const liveEvents = await apiResponse.json();
+    let liveEvents = await apiResponse.json();
+
+    liveEvents = liveEvents.map((liveEvent: any) => {
+      liveEvent.title = liveEvent.title.replace(
+        /THE IDOLM@STER CINDERELLA GIRLS /,
+        ''
+      );
+      return liveEvent;
+    });
 
     // 楽曲の配列を返す
     return liveEvents;
