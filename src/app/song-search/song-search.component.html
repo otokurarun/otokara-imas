@@ -85,4 +85,13 @@
       sortType="alphabetical"
     ></app-song-list>
   </mat-tab>
+
+  <!-- ライブ一覧及び楽曲リスト -->
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <mat-icon>stadium</mat-icon>
+    </ng-template>
+
+    <app-live-event-list brandName="cg"></app-live-event-list>
+  </mat-tab>
 </mat-tab-group>

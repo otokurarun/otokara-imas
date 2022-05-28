@@ -153,7 +153,7 @@ class Cron {
         const karaokeSong = await KaraokeSongRepository.findOne({
           where: [
             {
-              title: Like(`${liveSong.title}%`),
+              title: Like(`${liveSong.title.replace(/[ 　]/g, '%')}%`),
             },
             {
               title: Like(

@@ -76,6 +76,10 @@ imasSongsRouter.get(
     let karaokeSongs: any[] = [];
 
     for (const liveSong of liveEvent.songs) {
+      if (!liveSong.damRequestNo) {
+        continue;
+      }
+
       const karaokeSong = await KaraokeSongRepository.findOne({
         where: {
           damRequestNo: liveSong.damRequestNo,

@@ -9,9 +9,10 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { SongListComponent } from './song-list/song-list.component';
 import { MaterialModule } from '../material.module';
 import { SongSearchComponent } from './song-search/song-search.component';
+import { LiveEventListComponent } from './live-event-list/live-event-list.component';
 
 @NgModule({
-  declarations: [AppComponent, SongListComponent, SongSearchComponent],
+  declarations: [AppComponent, SongListComponent, SongSearchComponent, LiveEventListComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

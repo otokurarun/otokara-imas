@@ -13,7 +13,8 @@ export class SongListComponent implements OnInit {
 
   // 楽曲の検索タイプ
   @Input()
-  public searchType: 'keyword' | 'songName' | 'all' | 'none' = 'none';
+  public searchType: 'keyword' | 'songName' | 'liveEvent' | 'all' | 'none' =
+    'none';
 
   // 楽曲の並び替えタイプ
   @Input()
@@ -25,6 +26,7 @@ export class SongListComponent implements OnInit {
     keyword?: string;
     songName?: string;
     brandName?: string;
+    liveEventId?: number;
   };
 
   constructor(
@@ -61,6 +63,13 @@ export class SongListComponent implements OnInit {
     if (this.searchParams.brandName) {
       this.songs = await this.songsService.getSongsByBrandName(
         this.searchParams.brandName
+      );
+    }
+
+    // ライブイベントのIDがあれば、楽曲の検索処理を実行
+    if (this.searchParams.liveEventId) {
+      this.songs = await this.songsService.getSongsByLiveEventId(
+        this.searchParams.liveEventId
       );
     }
 
