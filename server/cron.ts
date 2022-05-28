@@ -2,16 +2,30 @@
 import * as dotenv from 'dotenv';
 dotenv.config({ path: `${__dirname}/.env` });
 
+import { FujiwarahajimeClient } from './fujiwarahajime-client';
+
 // Database接続を初期化
-import { AppDataSource, KaraokeSongRepository } from './database';
+import {
+  AppDataSource,
+  KaraokeSongRepository,
+  LiveEventRepository,
+} from './database';
 
 import fetch from 'node-fetch';
+import { Like } from 'typeorm';
 
 class Cron {
   static async execute() {
     // データベースの接続完了まで待機
     await AppDataSource.initialize();
 
+    this.crawlSongs();
+    this.crawlLiveEvents();
+
+    this.matchSongOfLiveEvents();
+  }
+
+  static async crawlSongs() {
     // 楽曲情報を取得
     const songs = await Cron.getSongsByKeyword(
       'アイドルマスターシンデレラガールズ'
@@ -40,7 +54,130 @@ class Cron {
       rankCount++;
     }
 
-    console.log(`${songs.length}件の保存が完了しました。`);
+    console.log(`${songs.length}件の楽曲を保存しました。`);
+  }
+
+  static async crawlLiveEvents() {
+    // ライブのリストを取得
+    const liveEvents = await FujiwarahajimeClient.getLiveEventsByKeyword(
+      'cinderella'
+    );
+
+    let counter = 0;
+    for (let liveEvent of liveEvents) {
+      if (
+        await LiveEventRepository.findOne({
+          where: {
+            id: liveEvent.tax_id,
+          },
+        })
+      ) {
+        continue;
+      }
+
+      if (1 < counter) {
+        break;
+      }
+      counter++;
+
+      // ライブ情報を取得
+      const liveEventDetail =
+        await FujiwarahajimeClient.getLiveEventDetailByTaxId(liveEvent.tax_id);
+
+      let songs: {
+        title: string;
+        artist: string;
+        damRequestNo?: string;
+      }[] = [];
+
+      for (let song of liveEventDetail.song) {
+        if (song.name == null) {
+          continue;
+        }
+
+        let artists: string[] = [];
+
+        if (song.unit) {
+          for (let unit of song.unit) {
+            for (let member of unit.member) {
+              artists.push(member.name);
+            }
+          }
+        }
+
+        if (song.member) {
+          for (let member of song.member) {
+            artists.push(member.name);
+          }
+        }
+
+        // アーティスト情報を配列から文字列に変換
+        let artistString: string = artists.join('、');
+
+        // 楽曲情報を配列にプッシュ
+        songs.push({
+          title: song.name,
+          artist: artistString,
+          damRequestNo: undefined,
+        });
+      }
+
+      //ライブ情報をDBに保存
+      await LiveEventRepository.save({
+        id: liveEvent.tax_id,
+        title: liveEvent.name,
+        date: liveEvent.date,
+        brandName: 'cg',
+        songs: songs,
+      });
+
+      console.log(`${liveEvent.name}を保存しました。`);
+    }
+
+    console.log(`${liveEvents.length}件のライブを保存しました。`);
+  }
+
+  static async matchSongOfLiveEvents() {
+    // DBから保存されたライブ情報を取得
+    const liveEvents = await LiveEventRepository.find();
+
+    // 各ライブ情報の楽曲を反復
+    for (let liveEvent of liveEvents) {
+      for (let liveSong of liveEvent.songs) {
+        // DAMリクエスト番号が入っていればなにもしない
+        if (liveSong.damRequestNo !== undefined) {
+          continue;
+        }
+
+        // 楽曲のマッチング
+        const karaokeSong = await KaraokeSongRepository.findOne({
+          where: [
+            {
+              title: Like(`${liveSong.title}%`),
+            },
+            {
+              title: Like(
+                `${liveSong.title.replace(/[！-～]/g, (str) => {
+                  // 全角記号を半角記号に変換
+                  return String.fromCharCode(str.charCodeAt(0) - 0xfee0);
+                })}%`
+              ),
+            },
+          ],
+        });
+
+        if (!karaokeSong) {
+          continue;
+        }
+
+        liveSong.damRequestNo = karaokeSong.damRequestNo;
+        console.log(
+          `${liveSong.title}と${karaokeSong.title}をマッチングしました。`
+        );
+      }
+
+      await liveEvent.save();
+    }
   }
 
   /**

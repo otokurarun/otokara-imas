@@ -1,7 +1,7 @@
-import { Entity, Column, PrimaryColumn } from 'typeorm';
+import { Entity, Column, PrimaryColumn, BaseEntity } from 'typeorm';
 
 @Entity()
-export class KaraokeSong {
+export class KaraokeSong extends BaseEntity {
   @Column()
   title: string;
 

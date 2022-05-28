@@ -1,10 +1,11 @@
 import { Router } from 'express';
+import { LiveEvent } from 'server/entities/live-event.entity';
 import { Like } from 'typeorm';
 
 const imasSongsRouter = Router();
 
 // Database接続を初期化
-import { KaraokeSongRepository } from '../database';
+import { KaraokeSongRepository, LiveEventRepository } from '../database';
 
 /**
  * GET /api/imasSongs/keyword/:keyword
@@ -56,5 +57,40 @@ imasSongsRouter.get('/ranking/:brandName', async (req, res) => {
 
   res.send(result);
 });
+
+/**
+ * GET /api/imasSongs/liveEvent/:liveEventId
+ * 指定されたライブイベントからセトリ順に楽曲を返すAPI
+ */
+imasSongsRouter.get(
+  '/liveEvent/:liveEventId',
+  async (req, res): Promise<any> => {
+    const liveEvent = await LiveEventRepository.findOne({
+      where: { id: parseInt(req.params.liveEventId, 10) },
+    });
+
+    if (liveEvent === null) {
+      return res.send([]);
+    }
+
+    let karaokeSongs: any[] = [];
+
+    for (const liveSong of liveEvent.songs) {
+      const karaokeSong = await KaraokeSongRepository.findOne({
+        where: {
+          damRequestNo: liveSong.damRequestNo,
+        },
+      });
+
+      if (karaokeSong === null) {
+        continue;
+      }
+
+      karaokeSongs.push(karaokeSong);
+    }
+
+    res.send(karaokeSongs);
+  }
+);
 
 export default imasSongsRouter;
