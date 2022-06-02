@@ -1,34 +1,38 @@
-section {
-  margin-top: 70px;
+.info-contents {
+  padding-bottom: 70px;
 
-  @media screen and (max-width: 767px) {
-    margin-top: 50px;
-  }
-
-  h2 {
-    font-size: 1.8rem;
-    font-weight: bold;
+  section {
+    margin-top: 70px;
 
     @media screen and (max-width: 767px) {
-      font-size: 1.4rem;
+      margin-top: 50px;
     }
-  }
 
-  .desc {
-    margin-top: 30px;
+    h2 {
+      font-size: 1.8rem;
+      font-weight: bold;
 
-    @media screen and (max-width: 767px) {
-      margin-top: 20px;
+      @media screen and (max-width: 767px) {
+        font-size: 1.4rem;
+      }
     }
-  }
 
-  p {
-    margin: 0;
-    font-size: 1rem;
-    line-height: 1.7;
+    .desc {
+      margin-top: 30px;
 
-    & + p {
-      margin-top: 20px;
+      @media screen and (max-width: 767px) {
+        margin-top: 20px;
+      }
+    }
+
+    p {
+      margin: 0;
+      font-size: 1rem;
+      line-height: 1.7;
+
+      & + p {
+        margin-top: 20px;
+      }
     }
   }
 }
