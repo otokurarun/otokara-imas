@@ -1,6 +1,6 @@
 # Otokara
 
-![Otokara Icon](https://raw.githubusercontent.com/tkamada022/otokara/0879a69925be5b267df8ef198e52177dc57ce06a/src/apple-touch-icon.png)
+![Otokara Icon](https://github.com/rairus00/otokara-imas/blob/main/src/apple-touch-icon.png)
 
 ---
 
