@@ -1,4 +1,5 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { MatTabChangeEvent } from '@angular/material/tabs';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SongListComponent } from '../song-list/song-list.component';
 import { SongsService } from '../songs.service';
@@ -22,6 +23,9 @@ export class SongSearchComponent implements OnInit {
     brandName?: string;
     liveEventId?: number;
   } = {};
+
+  // ページのタブ番号
+  public tabIndex: number = 0;
 
   @ViewChild('searchResultList')
   private searchResultList: SongListComponent;
@@ -71,6 +75,14 @@ export class SongSearchComponent implements OnInit {
     } else {
       this.searchType = 'none';
     }
+
+    // URLからタブ番号を取得
+    if (this.acivatedRoute.snapshot.queryParamMap.get('tab')) {
+      this.tabIndex = parseInt(
+        this.acivatedRoute.snapshot.queryParamMap.get('tab')!,
+        10
+      );
+    }
   }
 
   /**
@@ -99,5 +111,18 @@ export class SongSearchComponent implements OnInit {
 
     // 検索を実行
     this.searchResultList.search();
+  }
+
+  /**
+   * タブが切り替わったときのイベントハンドラ
+   * @param event タブ変更時のイベント
+   */
+  onSelectedTabChange(event: MatTabChangeEvent) {
+    // URLのクエリパラメータにタブ番号をいれる
+    this.router.navigate([''], {
+      queryParams: {
+        tab: event.index,
+      },
+    });
   }
 }
