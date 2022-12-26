@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { SearchParams, SearchType } from '../shared/song-search/search';
+import { SearchParams, SearchType } from '../shared/song-list/search';
 
 /**
  * 検索結果画面のコンポーネント
  * (キーワード検索、ライブの楽曲検索)
  */
 @Component({
-  selector: 'app-song-search-page',
+  selector: 'app-song-list-page',
   templateUrl: './song-search-page.component.html',
   styleUrls: ['./song-search-page.component.scss'],
 })

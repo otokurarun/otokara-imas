@@ -8,7 +8,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { SongCardComponent } from './shared/song-card/song-card.component';
 import { MaterialModule } from '../material.module';
-import { SongSearchComponent } from './shared/song-search/song-search.component';
+import { SongListComponent } from './shared/song-list/song-list.component';
 import { LiveEventListComponent } from './home-page/live-event-list/live-event-list.component';
 import { InfoPageComponent } from './info-page/info-page.component';
 import { HomePageComponent } from './home-page/home-page.component';
@@ -18,7 +18,7 @@ import { SongSearchPageComponent } from './song-search-page/song-search-page.com
   declarations: [
     AppComponent,
     SongCardComponent,
-    SongSearchComponent,
+    SongListComponent,
     LiveEventListComponent,
     InfoPageComponent,
     HomePageComponent,

@@ -33,12 +33,12 @@
       <mat-icon>show_chart</mat-icon>
     </ng-template>
 
-    <!-- 検索結果 (SongSearchComponent) -->
-    <app-song-search
+    <!-- 検索結果 (SongListComponent) -->
+    <app-song-list
       searchType="all"
       [searchParams]="{ brandName: 'cg' }"
       [sortType]="undefined"
-    ></app-song-search>
+    ></app-song-list>
   </mat-tab>
 
   <!-- 新着順の楽曲リスト -->
@@ -47,12 +47,12 @@
       <mat-icon>event</mat-icon>
     </ng-template>
 
-    <!-- 検索結果 (SongSearchComponent) -->
-    <app-song-search
+    <!-- 検索結果 (SongListComponent) -->
+    <app-song-list
       searchType="all"
       [searchParams]="{ brandName: 'cg' }"
       sortType="newer"
-    ></app-song-search>
+    ></app-song-list>
   </mat-tab>
 
   <!-- 50音順の楽曲リスト -->
@@ -61,12 +61,12 @@
       <mat-icon>sort_by_alpha</mat-icon>
     </ng-template>
 
-    <!-- 検索結果 (SongSearchComponent) -->
-    <app-song-search
+    <!-- 検索結果 (SongListComponent) -->
+    <app-song-list
       searchType="all"
       [searchParams]="{ brandName: 'cg' }"
       sortType="alphabetical"
-    ></app-song-search>
+    ></app-song-list>
   </mat-tab>
 
   <!-- ライブ一覧 -->

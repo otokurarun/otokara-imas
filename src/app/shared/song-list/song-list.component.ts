@@ -4,11 +4,11 @@ import { SongsService } from '../../songs.service';
 import { SearchParams, SearchType, SortType } from './search';
 
 @Component({
-  selector: 'app-song-search',
-  templateUrl: './song-search.component.html',
-  styleUrls: ['./song-search.component.scss'],
+  selector: 'app-song-list',
+  templateUrl: './song-list.component.html',
+  styleUrls: ['./song-list.component.scss'],
 })
-export class SongSearchComponent implements OnInit {
+export class SongListComponent implements OnInit {
   // 検索モード
   @Input()
   public searchType: SearchType;
@@ -30,13 +30,13 @@ export class SongSearchComponent implements OnInit {
    * コンポーネントが初期化されたときの処理
    */
   async ngOnInit(): Promise<void> {
-    this.search();
+    this.load();
   }
 
   /**
    * 楽曲の検索パラメータによって検索処理を実行
    */
-  public async search() {
+  public async load() {
     // キーワードがあれば、楽曲の検索処理を実行
     if (this.searchType == 'keyword' && this.searchParams.keyword) {
       this.songs = await this.songsService.getSongsByKeyword(
