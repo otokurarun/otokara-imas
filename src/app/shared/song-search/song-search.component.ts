@@ -38,30 +38,30 @@ export class SongSearchComponent implements OnInit {
    */
   public async search() {
     // キーワードがあれば、楽曲の検索処理を実行
-    if (this.searchParams.keyword) {
+    if (this.searchType == 'keyword' && this.searchParams.keyword) {
       this.songs = await this.songsService.getSongsByKeyword(
         this.searchParams.keyword
       );
     }
 
     // 曲名があれば、楽曲の検索処理を実行
-    if (this.searchParams.songName) {
+    if (this.searchType == 'songName' && this.searchParams.songName) {
       this.songs = await this.songsService.getSongsBySongName(
         this.searchParams.songName
       );
     }
 
-    // ブランド名があれば、楽曲の検索処理を実行
-    if (this.searchParams.brandName) {
-      this.songs = await this.songsService.getSongsByBrandName(
-        this.searchParams.brandName
+    // ライブイベントのIDがあれば、楽曲の検索処理を実行
+    if (this.searchType == 'liveEvent' && this.searchParams.liveEventId) {
+      this.songs = await this.songsService.getSongsByLiveEventId(
+        this.searchParams.liveEventId
       );
     }
 
-    // ライブイベントのIDがあれば、楽曲の検索処理を実行
-    if (this.searchParams.liveEventId) {
-      this.songs = await this.songsService.getSongsByLiveEventId(
-        this.searchParams.liveEventId
+    // ブランド名があれば、楽曲の検索処理を実行
+    if (this.searchType == 'all' && this.searchParams.brandName) {
+      this.songs = await this.songsService.getSongsByBrandName(
+        this.searchParams.brandName
       );
     }
 
