@@ -21,6 +21,12 @@ export class SongSearchFormComponent implements OnInit {
    * @param songName 検索曲名
    */
   async searchSongBySongName(songName: string) {
+    if (songName === null || songName.length === 0) {
+      // 空ならば、トップページへ戻す
+      this.router.navigate(['']);
+      return;
+    }
+
     // URLを「/imasSongs/songName/アイドルマスター」のように変更 (画面遷移される)
     this.router.navigate(['imasSongs', 'songName', songName]);
   }
@@ -30,6 +36,12 @@ export class SongSearchFormComponent implements OnInit {
    * @param keyword 検索キーワード
    */
   async searchSongByKeyword(keyword: string) {
+    if (keyword === null || keyword.length === 0) {
+      // 空ならば、トップページへ戻す
+      this.router.navigate(['']);
+      return;
+    }
+
     // URLを「/imasSongs/keyword/アイドルマスター」のように変更 (画面遷移される)
     this.router.navigate(['imasSongs', 'keyword', keyword]);
   }
