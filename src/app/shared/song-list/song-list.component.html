@@ -1,28 +1,3 @@
-<div *ngIf="this.searchType != 'none' && this.songs" class="song-list">
-  <p>
-    <span *ngIf="this.searchType == 'keyword'">
-      キーワード「{{ this.searchParams.keyword }}」 を含む検索結果が{{
-        this.songs?.length
-      }}件見つかりました。
-    </span>
-    <span *ngIf="this.searchType == 'songName'">
-      曲名「{{ this.searchParams.songName }}」 を含む検索結果が{{
-        this.songs?.length
-      }}件見つかりました。
-    </span>
-  </p>
-</div>
-
-<div
-  class="search-loading"
-  *ngIf="this.searchType != 'none' && this.songs == undefined"
->
-  検索中...<br />
-  <div class="moving-shoes-container">
-    <img class="moving-shoes" src="/assets/shoes.png" />
-  </div>
-</div>
-
 <div class="song-list">
   <mat-card *ngFor="let song of this.songs" class="song-card">
     <mat-card-title>

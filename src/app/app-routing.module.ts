@@ -1,32 +1,29 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { InfoComponent } from './info/info.component';
-import { SongSearchComponent } from './song-search/song-search.component';
+import { HomePageComponent } from './home-page/home-page.component';
+import { InfoPageComponent } from './info-page/info-page.component';
+import { SongSearchPageComponent } from './song-search-page/song-search-page.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: SongSearchComponent,
+    component: HomePageComponent,
   },
   {
     path: 'info',
-    component: InfoComponent,
+    component: InfoPageComponent,
   },
   {
     path: 'imasSongs/keyword/:keyword',
-    component: SongSearchComponent,
+    component: SongSearchPageComponent,
   },
   {
     path: 'imasSongs/songName/:songName',
-    component: SongSearchComponent,
-  },
-  {
-    path: 'imasSongs/ranking/:rankingBrandName',
-    component: SongSearchComponent,
+    component: SongSearchPageComponent,
   },
   {
     path: 'imasSongs/liveEvent/:liveEventId',
-    component: SongSearchComponent,
+    component: SongSearchPageComponent,
   },
 ];
 

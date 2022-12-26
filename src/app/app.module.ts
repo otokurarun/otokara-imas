@@ -6,14 +6,24 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { SongListComponent } from './song-list/song-list.component';
+import { SongListComponent } from './shared/song-list/song-list.component';
 import { MaterialModule } from '../material.module';
-import { SongSearchComponent } from './song-search/song-search.component';
-import { LiveEventListComponent } from './live-event-list/live-event-list.component';
-import { InfoComponent } from './info/info.component';
+import { SongSearchComponent } from './shared/song-search/song-search.component';
+import { LiveEventListComponent } from './home-page/live-event-list/live-event-list.component';
+import { InfoPageComponent } from './info-page/info-page.component';
+import { HomePageComponent } from './home-page/home-page.component';
+import { SongSearchPageComponent } from './song-search-page/song-search-page.component';
 
 @NgModule({
-  declarations: [AppComponent, SongListComponent, SongSearchComponent, LiveEventListComponent, InfoComponent],
+  declarations: [
+    AppComponent,
+    SongListComponent,
+    SongSearchComponent,
+    LiveEventListComponent,
+    InfoPageComponent,
+    HomePageComponent,
+    SongSearchPageComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,

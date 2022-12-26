@@ -1,0 +1,29 @@
+<!-- 検索結果 -->
+<ng-container *ngIf="this.searchType != 'none'">
+  <!-- 検索結果の件数 -->
+  <div *ngIf="this.songs" class="song-list">
+    <p>
+      <span *ngIf="this.searchType == 'keyword'">
+        キーワード「{{ this.searchParams.keyword }}」 を含む検索結果が{{
+          this.songs.length
+        }}件見つかりました。
+      </span>
+      <span *ngIf="this.searchType == 'songName'">
+        曲名「{{ this.searchParams.songName }}」 を含む検索結果が{{
+          this.songs.length
+        }}件見つかりました。
+      </span>
+    </p>
+  </div>
+</ng-container>
+
+<!-- 検索中のアニメーション -->
+<div class="search-loading" *ngIf="this.songs == undefined">
+  検索中...<br />
+  <div class="moving-shoes-container">
+    <img class="moving-shoes" src="/assets/shoes.png" />
+  </div>
+</div>
+
+<!-- 楽曲リスト (AppSongListComponent) -->
+<app-song-list [songs]="this.songs"></app-song-list>
