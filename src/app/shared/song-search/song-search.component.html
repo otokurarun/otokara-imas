@@ -26,4 +26,6 @@
 </div>
 
 <!-- 楽曲リスト (SongListComponent) -->
-<app-song-list [songs]="this.songs"></app-song-list>
+<div class="song-list">
+  <app-song-card *ngFor="let song of this.songs" [song]="song"></app-song-card>
+</div>

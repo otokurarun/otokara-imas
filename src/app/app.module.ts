@@ -6,7 +6,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { SongListComponent } from './shared/song-list/song-list.component';
+import { SongCardComponent } from './shared/song-card/song-card.component';
 import { MaterialModule } from '../material.module';
 import { SongSearchComponent } from './shared/song-search/song-search.component';
 import { LiveEventListComponent } from './home-page/live-event-list/live-event-list.component';
@@ -17,7 +17,7 @@ import { SongSearchPageComponent } from './song-search-page/song-search-page.com
 @NgModule({
   declarations: [
     AppComponent,
-    SongListComponent,
+    SongCardComponent,
     SongSearchComponent,
     LiveEventListComponent,
     InfoPageComponent,
