@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { MatTabChangeEvent } from '@angular/material/tabs';
+import { ActivatedRoute, Router } from '@angular/router';
 
 /**
  * ホーム画面のコンポーネント
@@ -10,7 +11,31 @@ import { Router } from '@angular/router';
   styleUrls: ['./home-page.component.scss'],
 })
 export class HomePageComponent implements OnInit {
-  constructor(private router: Router) {}
+  // 開かれているタブページの番号
+  public tabIndex: number = 0;
 
-  ngOnInit(): void {}
+  constructor(private router: Router, private activatedRoute: ActivatedRoute) {}
+
+  ngOnInit(): void {
+    // URL のクエリパラメータからタブページの番号を取得
+    if (this.activatedRoute.snapshot.queryParamMap.get('tab')) {
+      this.tabIndex = parseInt(
+        this.activatedRoute.snapshot.queryParamMap.get('tab')!,
+        10
+      );
+    }
+  }
+
+  /**
+   * タブが切り替わったときのイベントハンドラ
+   * @param event タブ変更時のイベント
+   */
+  onSelectedTabChange(event: MatTabChangeEvent) {
+    // URLのクエリパラメータにタブページの番号をいれる
+    this.router.navigate([''], {
+      queryParams: {
+        tab: event.index,
+      },
+    });
+  }
 }

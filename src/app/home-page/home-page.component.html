@@ -2,7 +2,11 @@
 <app-song-search-form></app-song-search-form>
 
 <!-- TOPページ用楽曲リスト -->
-<mat-tab-group mat-align-tabs="end">
+<mat-tab-group
+  mat-align-tabs="end"
+  (selectedTabChange)="this.onSelectedTabChange($event)"
+  [selectedIndex]="this.tabIndex"
+>
   <!-- 人気順の楽曲リスト -->
   <mat-tab>
     <ng-template mat-tab-label>
