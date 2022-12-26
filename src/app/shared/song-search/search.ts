@@ -7,4 +7,4 @@ export interface SearchParams {
 
 export type SortType = 'newer' | 'alphabetical' | undefined;
 
-export type SearchType = 'keyword' | 'songName' | 'liveEvent' | 'all' | 'none';
+export type SearchType = 'keyword' | 'songName' | 'liveEvent' | 'all';
