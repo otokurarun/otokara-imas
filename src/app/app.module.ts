@@ -13,6 +13,7 @@ import { LiveEventListComponent } from './home-page/live-event-list/live-event-l
 import { InfoPageComponent } from './info-page/info-page.component';
 import { HomePageComponent } from './home-page/home-page.component';
 import { SongSearchPageComponent } from './song-search-page/song-search-page.component';
+import { SongSearchFormComponent } from './shared/song-search-form/song-search-form.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { SongSearchPageComponent } from './song-search-page/song-search-page.com
     InfoPageComponent,
     HomePageComponent,
     SongSearchPageComponent,
+    SongSearchFormComponent,
   ],
   imports: [
     BrowserModule,

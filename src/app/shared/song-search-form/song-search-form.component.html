@@ -1,0 +1,41 @@
+<!-- TOPページ用キーワード検索欄 -->
+<form (ngSubmit)="searchSongByKeyword(keywordInput.value)">
+  <mat-form-field appearance="outline" floatLabel="always" style="width: 100%">
+    <mat-label>キーワードを入力</mat-label>
+    <input
+      placeholder="例）乙倉悠貴"
+      matInput
+      name="keyword"
+      #keywordInput
+      [value]="
+        this.searchParams && this.searchParams.keyword
+          ? this.searchParams.keyword
+          : ''
+      "
+    />
+    <button mat-icon-button matSuffix aria-label="登録">
+      <mat-icon> send </mat-icon>
+    </button>
+  </mat-form-field>
+</form>
+
+<!-- TOPページ用曲名検索欄 -->
+<form (ngSubmit)="searchSongBySongName(songNameInput.value)">
+  <mat-form-field appearance="outline" floatLabel="always" style="width: 100%">
+    <mat-label>曲名を入力</mat-label>
+    <input
+      placeholder="例）ずるじゃん"
+      matInput
+      name="songName"
+      #songNameInput
+      [value]="
+        this.searchParams && this.searchParams.songName
+          ? this.searchParams.songName
+          : ''
+      "
+    />
+    <button mat-icon-button matSuffix aria-label="登録">
+      <mat-icon> send </mat-icon>
+    </button>
+  </mat-form-field>
+</form>
