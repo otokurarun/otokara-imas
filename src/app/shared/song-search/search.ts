@@ -5,6 +5,6 @@ export interface SearchParams {
   liveEventId?: number;
 }
 
-export type SortType = 'popular' | 'newer' | 'alphabetical';
+export type SortType = 'newer' | 'alphabetical' | undefined;
 
 export type SearchType = 'keyword' | 'songName' | 'liveEvent' | 'all' | 'none';

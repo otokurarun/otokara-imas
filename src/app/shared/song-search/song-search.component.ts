@@ -19,7 +19,7 @@ export class SongSearchComponent implements OnInit {
 
   // ソート
   @Input()
-  public sortType?: SortType = 'popular';
+  public sortType?: SortType;
 
   // 検索結果
   public songs?: any[] = undefined;
@@ -70,7 +70,7 @@ export class SongSearchComponent implements OnInit {
     }
 
     // 配信が新しい順にソート
-    if (this.sortType == 'newer') {
+    if (this.sortType && this.sortType == 'newer') {
       this.songs.sort((a: any, b: any) => {
         if (!a.damReleaseDate) return -1;
         if (!b.damReleaseDate) return 1;
@@ -89,7 +89,7 @@ export class SongSearchComponent implements OnInit {
     }
 
     // 50音順にソート
-    if (this.sortType == 'alphabetical') {
+    if (this.sortType && this.sortType == 'alphabetical') {
       this.songs.sort((a: any, b: any) =>
         a.titleYomi.localeCompare(b.titleYomi, 'ja')
       );
