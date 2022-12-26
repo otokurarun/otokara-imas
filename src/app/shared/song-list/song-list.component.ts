@@ -1,4 +1,12 @@
-import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  Input,
+  OnChanges,
+  OnInit,
+  SimpleChanges,
+  ViewChild,
+} from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SongsService } from '../../songs.service';
 import { SearchParams, SearchType, SortType } from './search';
@@ -8,7 +16,7 @@ import { SearchParams, SearchType, SortType } from './search';
   templateUrl: './song-list.component.html',
   styleUrls: ['./song-list.component.scss'],
 })
-export class SongListComponent implements OnInit {
+export class SongListComponent implements OnInit, OnChanges {
   // 検索モード
   @Input()
   public searchType: SearchType;
@@ -34,9 +42,19 @@ export class SongListComponent implements OnInit {
   }
 
   /**
+   * "@Input" で指定されたプロパティが変更されたときの処理
+   * @param changes 変更内容
+   */
+  ngOnChanges(changes: SimpleChanges): void {
+    this.load();
+  }
+
+  /**
    * 楽曲の検索パラメータによって検索処理を実行
    */
   public async load() {
+    this.songs = undefined;
+
     // キーワードがあれば、楽曲の検索処理を実行
     if (this.searchType == 'keyword' && this.searchParams.keyword) {
       this.songs = await this.songsService.getSongsByKeyword(
