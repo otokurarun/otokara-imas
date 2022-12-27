@@ -1,0 +1,61 @@
+// トップページにおけるブランド選択
+
+.brand-selector {
+  width: 100%;
+
+  p {
+    color: #777777;
+    font-size: 10pt;
+    text-align: center;
+    margin: 0 0 0 0;
+    padding: 1rem 0 1rem 0;
+  }
+
+  br.sp-only {
+    display: none;
+
+    @media screen and (max-width: 599px) {
+      display: block;
+    }
+  }
+
+  .brand-select-cards {
+    a {
+      width: 100%;
+      max-width: 100%;
+      text-decoration: none;
+
+      .brand-select-card {
+        cursor: pointer;
+        margin-top: 20px;
+        transition: all 0.3s ease-in-out;
+
+        &.disabled {
+          background-color: #dddddd !important;
+        }
+
+        &:hover {
+          opacity: 0.9;
+        }
+
+        & + .brand-select-card {
+          margin-top: 30px;
+        }
+
+        .title {
+          color: #ffffff;
+          font-family: "Roboto", sans-serif;
+          font-weight: lighter;
+          padding: 0;
+          text-decoration: none;
+          display: block;
+          line-height: initial;
+
+          @media screen and (max-width: 767px) {
+            font-size: 20px;
+          }
+        }
+      }
+    }
+  }
+}

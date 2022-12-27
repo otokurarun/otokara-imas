@@ -4,12 +4,23 @@
   (click)="isShowing = !isShowing"
   [ngClass]="{ showing: isShowing }"
 >
-  <div class="current-brand">
+  <div
+    class="current-brand"
+    [ngClass]="{
+      'brand-all': this.currentBrandName === 'all',
+      'brand-cg': this.currentBrandName === 'cg',
+      'brand-sc': this.currentBrandName === 'sc',
+      'brand-as': this.currentBrandName === 'as',
+      'brand-ml': this.currentBrandName === 'ml',
+      'brand-sm': this.currentBrandName === 'sm'
+    }"
+  >
     <ng-container *ngIf="this.currentBrandName == 'all'">ALL</ng-container>
     <ng-container *ngIf="this.currentBrandName == 'cg'">CG</ng-container>
     <ng-container *ngIf="this.currentBrandName == 'sc'">SC</ng-container>
     <ng-container *ngIf="this.currentBrandName == 'as'">AS</ng-container>
-    <ng-container *ngIf="this.currentBrandName == 'sm'">AS</ng-container>
+    <ng-container *ngIf="this.currentBrandName == 'ml'">ML</ng-container>
+    <ng-container *ngIf="this.currentBrandName == 'sm'">SM</ng-container>
     <mat-icon>arrow_drop_down</mat-icon>
   </div>
 </div>
@@ -41,6 +52,14 @@
       <!--
       <li (click)="this.setBrandName('as')">
         <p class="brand-mark" style="color: #f34f6d">AS</p>
+        <p class="brand-name">765PRO ALLSTARS</p>
+      </li>
+      -->
+
+      <!-- ミリオンライブ -->
+      <!--
+      <li (click)="this.setBrandName('as')">
+        <p class="brand-mark" style="color: #ffc309">AS</p>
         <p class="brand-name">765PRO ALLSTARS</p>
       </li>
       -->

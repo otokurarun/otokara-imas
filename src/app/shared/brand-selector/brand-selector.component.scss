@@ -14,13 +14,38 @@
   z-index: 1000;
 }
 
+// ブランド別カラー
+
+.brand-all {
+  color: #ff74b8;
+}
+
+.brand-cg {
+  color: #2681c8;
+}
+
+.brand-sc {
+  color: #8dbbff;
+}
+
+.brand-as {
+  color: #f34f6d;
+}
+
+.brand-ml {
+  color: #ffc309;
+}
+
+.brand-sm {
+  color: #0fbe94;
+}
+
 // ブランド選択を表示するためのボタン
 
 .brand-selector-btn {
   background-color: #fefefe20;
   cursor: pointer;
   user-select: none;
-  color: #fefefe;
   font-family: "Raleway", sans-serif;
   height: 64px;
   line-height: 64px;
@@ -30,13 +55,19 @@
   width: 80px;
   left: 0;
   top: 0;
+  transition: all 0.3s ease-in-out;
+
+  @media screen and (max-width: 599px) {
+    height: 56px;
+    line-height: 56px;
+  }
 
   &:hover {
-    background-color: #ffffff30;
+    background-color: #d0d0d030;
   }
 
   &.showing {
-    background-color: #fefefe40;
+    background-color: #d0d0d040;
   }
 
   .current-brand {
@@ -69,9 +100,10 @@
       background-color: #ffffffaa;
       cursor: pointer;
       margin: 0 0 0 0;
-      padding: 1rem 1.5rem 0.5rem 1rem;
+      padding: 1.3rem 1.5rem 0.5rem 1rem;
       border-bottom: 1px solid #dddddd;
       width: 100%;
+      transition: background-color 0.3s ease-in-out;
 
       .brand-mark {
         display: inline-block;
@@ -92,7 +124,7 @@
     }
 
     li:hover {
-      background-color: #efefefaa;
+      background-color: #d0d0d040;
     }
   }
 }

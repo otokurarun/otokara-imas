@@ -1,26 +1,42 @@
 .toolbar {
-  background-color: #f48fb1;
+  background-color: white;
 
-  &__title {
+  a {
+    transition: all 0.3s ease-in-out;
+
+    &:hover {
+      opacity: 0.6;
+    }
+  }
+
+  .toolbar-title {
     margin: 0 auto;
-    font-size: 1.6rem;
+    font-size: 1.4rem;
+    text-align: center;
+    font-family: "M PLUS Rounded 1c";
 
-    @media screen and (max-width: 767px) {
+    @media screen and (max-width: 599px) {
       font-size: 1.5rem;
+      padding-left: 30px;
     }
 
-    > a {
-      color: white;
+    .logo-link {
+      color: #333;
       text-decoration: none;
     }
 
-    &--small {
+    .toolbar-title-small {
       font-size: 0.5em;
+      padding-left: 5px;
+
+      @media screen and (max-width: 599px) {
+        display: none;
+      }
     }
   }
 
   .info-icon {
-    color: white;
+    color: #333;
   }
 }
 
