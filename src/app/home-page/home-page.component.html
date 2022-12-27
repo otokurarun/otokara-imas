@@ -1,0 +1,61 @@
+<!-- 楽曲検索フォーム (SongSearchFormComponent) -->
+<app-song-search-form></app-song-search-form>
+
+<!-- TOPページ用楽曲リスト -->
+<mat-tab-group
+  mat-align-tabs="end"
+  (selectedTabChange)="this.onSelectedTabChange($event)"
+  [selectedIndex]="this.tabIndex"
+>
+  <!-- 人気順の楽曲リスト -->
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <mat-icon>show_chart</mat-icon>
+    </ng-template>
+
+    <!-- 検索結果 (SongListComponent) -->
+    <app-song-list
+      searchType="all"
+      [searchParams]="{ brandName: 'cg' }"
+      [sortType]="undefined"
+    ></app-song-list>
+  </mat-tab>
+
+  <!-- 新着順の楽曲リスト -->
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <mat-icon>event</mat-icon>
+    </ng-template>
+
+    <!-- 検索結果 (SongListComponent) -->
+    <app-song-list
+      searchType="all"
+      [searchParams]="{ brandName: 'cg' }"
+      sortType="newer"
+    ></app-song-list>
+  </mat-tab>
+
+  <!-- 50音順の楽曲リスト -->
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <mat-icon>sort_by_alpha</mat-icon>
+    </ng-template>
+
+    <!-- 検索結果 (SongListComponent) -->
+    <app-song-list
+      searchType="all"
+      [searchParams]="{ brandName: 'cg' }"
+      sortType="alphabetical"
+    ></app-song-list>
+  </mat-tab>
+
+  <!-- ライブ一覧 -->
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <mat-icon>stadium</mat-icon>
+    </ng-template>
+
+    <!-- ライブ一覧 (LiveEventListComponent) -->
+    <app-live-event-list brandName="cg"></app-live-event-list>
+  </mat-tab>
+</mat-tab-group>
