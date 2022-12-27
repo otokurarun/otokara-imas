@@ -138,6 +138,12 @@ export class SongsService {
     // レスポンスとして返されたjsonをオブジェクトに変換して、変数に代入
     let liveEvent = await apiResponse.json();
 
+    // イベントの一覧表示時に不要な重複した内容を削除
+    liveEvent.title = liveEvent.title.replace(
+      /THE IDOLM@STER CINDERELLA GIRLS /,
+      ''
+    );
+
     // イベント情報を返す
     return liveEvent;
   }
