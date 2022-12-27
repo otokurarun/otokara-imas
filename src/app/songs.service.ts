@@ -97,7 +97,9 @@ export class SongsService {
    */
   async getLiveEventsByBrandName(brandName: string) {
     // バックエンドに対してリクエストを送信
-    const apiResponse = await fetch(`/api/imasLiveEvents/${brandName}`);
+    const apiResponse = await fetch(
+      `/api/imasLiveEvents?brandName=${brandName}`
+    );
 
     // リクエストに失敗した場合、エラーをスロー
     if (!apiResponse.ok) {
@@ -107,6 +109,7 @@ export class SongsService {
     // レスポンスとして返されたjsonを配列に変換して、変数に代入
     let liveEvents = await apiResponse.json();
 
+    // イベントの一覧表示時に不要な重複した内容を削除
     liveEvents = liveEvents.map((liveEvent: any) => {
       liveEvent.title = liveEvent.title.replace(
         /THE IDOLM@STER CINDERELLA GIRLS /,
@@ -117,5 +120,25 @@ export class SongsService {
 
     // 楽曲の配列を返す
     return liveEvents;
+  }
+
+  /**
+   * 指定されたIDでライブ情報を取得
+   * @param liveEventId ライブイベントのID
+   */
+  async getLiveEventById(liveEventId: number) {
+    // バックエンドに対してリクエストを送信
+    const apiResponse = await fetch(`/api/imasLiveEvents/${liveEventId}`);
+
+    // リクエストに失敗した場合、エラーをスロー
+    if (!apiResponse.ok) {
+      throw apiResponse.status;
+    }
+
+    // レスポンスとして返されたjsonをオブジェクトに変換して、変数に代入
+    let liveEvent = await apiResponse.json();
+
+    // イベント情報を返す
+    return liveEvent;
   }
 }

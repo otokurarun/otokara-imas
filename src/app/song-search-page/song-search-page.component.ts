@@ -8,7 +8,7 @@ import { SearchParams, SearchType } from '../shared/song-list/search';
  * (キーワード検索、ライブの楽曲検索)
  */
 @Component({
-  selector: 'app-song-list-page',
+  selector: 'app-song-search-page',
   templateUrl: './song-search-page.component.html',
   styleUrls: ['./song-search-page.component.scss'],
 })

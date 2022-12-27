@@ -13,6 +13,9 @@
         }}件見つかりました。
       </span>
     </p>
+    <h2 *ngIf="this.searchType == 'liveEvent'">
+      {{ this.liveEvent?.title }}
+    </h2>
   </div>
 </ng-container>
 

@@ -32,6 +32,9 @@ export class SongListComponent implements OnInit, OnChanges {
   // 検索結果
   public songs?: any[] = undefined;
 
+  // イベント情報(ライブイベントのセトリを表示するときのみ)
+  public liveEvent?: any = undefined;
+
   constructor(private songsService: SongsService) {}
 
   /**
@@ -71,6 +74,12 @@ export class SongListComponent implements OnInit, OnChanges {
 
     // ライブイベントのIDがあれば、楽曲の検索処理を実行
     if (this.searchType == 'liveEvent' && this.searchParams.liveEventId) {
+      // ライブイベントの情報を取得
+      this.liveEvent = await this.songsService.getLiveEventById(
+        this.searchParams.liveEventId
+      );
+
+      // 楽曲を検索
       this.songs = await this.songsService.getSongsByLiveEventId(
         this.searchParams.liveEventId
       );
