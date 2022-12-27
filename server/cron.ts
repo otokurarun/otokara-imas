@@ -19,17 +19,16 @@ class Cron {
     // データベースの接続完了まで待機
     await AppDataSource.initialize();
 
-    this.crawlSongs();
+    this.crawlSongs('cg', 'アイドルマスターシンデレラガールズ');
+    this.crawlSongs('sc', 'アイドルマスターシャイニーカラーズ');
     this.crawlLiveEvents();
 
     this.matchSongOfLiveEvents();
   }
 
-  static async crawlSongs() {
+  static async crawlSongs(brand: string, brandName: string) {
     // 楽曲情報を取得
-    const songs = await Cron.getSongsByKeyword(
-      'アイドルマスターシンデレラガールズ'
-    );
+    const songs = await Cron.getSongsByKeyword(brandName);
 
     // 人気順位を初期化
     let rankCount: number = 1;
@@ -46,7 +45,7 @@ class Cron {
         damReleaseDate: song.releaseDate,
         damRequestNo: song.requestNo,
         damRank: rankCount,
-        brand: 'cg',
+        brand: brand,
       });
 
       console.log(`${song.title}を保存しました。`);
