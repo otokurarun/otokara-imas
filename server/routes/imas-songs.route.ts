@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import { KaraokeSong } from 'server/entities/karaoke-song.entity';
 import { LiveEvent } from 'server/entities/live-event.entity';
-import { Like } from 'typeorm';
+import { ILike, Like } from 'typeorm';
 
 const imasSongsRouter = Router();
 
@@ -21,7 +21,7 @@ imasSongsRouter.get('/keyword/:keyword', async (req, res) => {
     // ブランド名で絞り込んだ検索結果を取得
     result = await KaraokeSongRepository.find({
       where: [
-        { title: Like(`%${req.params.keyword}%`), brand: brandName },
+        { title: ILike(`%${req.params.keyword}%`), brand: brandName },
         { titleYomi: Like(`%${req.params.keyword}%`), brand: brandName },
         { artist: Like(`%${req.params.keyword}%`), brand: brandName },
         { artistYomi: Like(`%${req.params.keyword}%`), brand: brandName },
@@ -32,7 +32,7 @@ imasSongsRouter.get('/keyword/:keyword', async (req, res) => {
     // 検索結果を取得
     result = await KaraokeSongRepository.find({
       where: [
-        { title: Like(`%${req.params.keyword}%`) },
+        { title: ILike(`%${req.params.keyword}%`) },
         { titleYomi: Like(`%${req.params.keyword}%`) },
         { artist: Like(`%${req.params.keyword}%`) },
         { artistYomi: Like(`%${req.params.keyword}%`) },
@@ -58,7 +58,7 @@ imasSongsRouter.get('/songName/:songName', async (req, res) => {
     // ブランド名で絞り込んだ検索結果を取得
     result = await KaraokeSongRepository.find({
       where: [
-        { title: Like(`%${req.params.songName}%`), brand: brandName },
+        { title: ILike(`%${req.params.songName}%`), brand: brandName },
         { titleYomi: Like(`%${req.params.songName}%`), brand: brandName },
       ],
       order: { titleYomi: 'ASC' },
@@ -67,7 +67,7 @@ imasSongsRouter.get('/songName/:songName', async (req, res) => {
     // 検索結果を取得
     result = await KaraokeSongRepository.find({
       where: [
-        { title: Like(`%${req.params.songName}%`) },
+        { title: ILike(`%${req.params.songName}%`) },
         { titleYomi: Like(`%${req.params.songName}%`) },
       ],
       order: { titleYomi: 'ASC' },
