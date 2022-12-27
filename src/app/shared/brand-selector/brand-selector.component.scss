@@ -4,7 +4,7 @@
   background-color: #ffffff88;
   backdrop-filter: blur(6px);
   position: fixed;
-  top: 65px;
+  top: 0px;
   bottom: 0;
   left: 0;
   right: 0px;
@@ -56,6 +56,7 @@
   left: 0;
   top: 0;
   transition: all 0.3s ease-in-out;
+  z-index: 1002;
 
   @media screen and (max-width: 599px) {
     height: 56px;
@@ -87,7 +88,7 @@
   padding: 0 0 0 0;
   position: fixed;
   width: 100%;
-  top: 0;
+  top: 64px;
   left: 0;
 
   ul {
@@ -97,7 +98,7 @@
     width: 100%;
 
     li {
-      background-color: #ffffffaa;
+      background-color: #ffffff80;
       cursor: pointer;
       margin: 0 0 0 0;
       padding: 1.3rem 1.5rem 0.5rem 1rem;
