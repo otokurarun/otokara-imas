@@ -13,6 +13,13 @@
         }}件見つかりました。
       </span>
     </p>
+    <!-- イベントタイトル(ライブイベントのセトリを表示するときのみ) -->
+    <div class="event-summary" *ngIf="this.searchType == 'liveEvent'">
+      <h2 class="event-title">
+        {{ this.liveEvent?.title }}
+      </h2>
+      <small>{{ this.liveEvent.date }}</small>
+    </div>
   </div>
 </ng-container>
 
