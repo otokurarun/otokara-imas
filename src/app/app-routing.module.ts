@@ -14,10 +14,6 @@ const routes: Routes = [
     component: InfoPageComponent,
   },
   {
-    path: ':brandName',
-    component: HomePageComponent,
-  },
-  {
     path: ':brandName/imasSongs/keyword/:keyword',
     component: SongSearchPageComponent,
   },
@@ -28,6 +24,10 @@ const routes: Routes = [
   {
     path: ':brandName/imasSongs/liveEvent/:liveEventId',
     component: SongSearchPageComponent,
+  },
+  {
+    path: ':brandName',
+    component: HomePageComponent,
   },
 ];
 

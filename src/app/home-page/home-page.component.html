@@ -1,6 +1,17 @@
 <!-- 楽曲検索フォーム (SongSearchFormComponent) -->
 <app-song-search-form></app-song-search-form>
 
+<!-- ブランド選択 (全ブランドのトップページの場合のみ) -->
+<div *ngIf="this.brandName == 'all'">
+  新着順や、ライブ別の曲を表示するには、ブランドをお選びください:
+
+  <ul>
+    <li (click)="this.onImasBrandChange('cg')">CINDERELLA GIRLS</li>
+    <li (click)="this.onImasBrandChange('sc')">SHINY COLORS</li>
+  </ul>
+</div>
+<!---->
+
 <!-- TOPページ用楽曲リスト (ブランド別トップページの場合のみ) -->
 <mat-tab-group
   mat-align-tabs="end"
@@ -17,7 +28,7 @@
     <!-- 検索結果 (SongListComponent) -->
     <app-song-list
       searchType="all"
-      [searchParams]="{ brandName: 'cg' }"
+      [searchParams]="{ brandName: this.brandName }"
       [sortType]="undefined"
     ></app-song-list>
   </mat-tab>
@@ -31,7 +42,7 @@
     <!-- 検索結果 (SongListComponent) -->
     <app-song-list
       searchType="all"
-      [searchParams]="{ brandName: 'cg' }"
+      [searchParams]="{ brandName: this.brandName }"
       sortType="newer"
     ></app-song-list>
   </mat-tab>
@@ -45,7 +56,7 @@
     <!-- 検索結果 (SongListComponent) -->
     <app-song-list
       searchType="all"
-      [searchParams]="{ brandName: 'cg' }"
+      [searchParams]="{ brandName: this.brandName }"
       sortType="alphabetical"
     ></app-song-list>
   </mat-tab>
@@ -57,6 +68,6 @@
     </ng-template>
 
     <!-- ライブ一覧 (LiveEventListComponent) -->
-    <app-live-event-list brandName="cg"></app-live-event-list>
+    <app-live-event-list [brandName]="this.brandName"></app-live-event-list>
   </mat-tab>
 </mat-tab-group>

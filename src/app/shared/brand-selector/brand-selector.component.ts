@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AppService } from 'src/app/app.service';
 import { ImasBrand } from '../imas-brand';
 
 @Component({
@@ -10,9 +11,16 @@ export class BrandSelectorComponent implements OnInit {
   public isShowing = false;
   public currentBrandName: ImasBrand = 'all';
 
-  constructor() {}
+  constructor(private appService: AppService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    // アイマスブランドが変更されたときのイベントリスナを設定
+    this.appService.imasBrandChangeEventNotifier.subscribe(
+      (brandName: ImasBrand) => {
+        this.currentBrandName = brandName;
+      }
+    );
+  }
 
   /**
    * 表示するアイマスブランドの設定
@@ -20,5 +28,6 @@ export class BrandSelectorComponent implements OnInit {
    */
   setBrandName(brandName: ImasBrand) {
     this.currentBrandName = brandName;
+    this.appService.setImasBrand(brandName);
   }
 }
