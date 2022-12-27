@@ -1,0 +1,57 @@
+<!-- ブランド選択を表示するためのボタン -->
+<div
+  class="brand-selector-btn"
+  (click)="isShowing = !isShowing"
+  [ngClass]="{ showing: isShowing }"
+>
+  <div class="current-brand">
+    <ng-container *ngIf="this.currentBrandName == 'all'">ALL</ng-container>
+    <ng-container *ngIf="this.currentBrandName == 'cg'">CG</ng-container>
+    <ng-container *ngIf="this.currentBrandName == 'sc'">SC</ng-container>
+    <ng-container *ngIf="this.currentBrandName == 'as'">AS</ng-container>
+    <ng-container *ngIf="this.currentBrandName == 'sm'">AS</ng-container>
+    <mat-icon>arrow_drop_down</mat-icon>
+  </div>
+</div>
+
+<!-- モーダル -->
+<div class="modal" (click)="isShowing = false" *ngIf="isShowing">
+  <!-- ブランド選択 -->
+  <div class="brand-selector" *ngIf="isShowing">
+    <ul>
+      <!-- 全て (横断検索) -->
+      <li (click)="this.setBrandName('all')">
+        <p class="brand-mark" style="color: #ff74b8">-</p>
+        <p class="brand-name">ALL</p>
+      </li>
+
+      <!-- シンデレラガールズ -->
+      <li (click)="this.setBrandName('cg')">
+        <p class="brand-mark" style="color: #2681c8">CG</p>
+        <p class="brand-name">CINDERELLA GIRLS</p>
+      </li>
+
+      <!-- シャイニーカラーズ -->
+      <li (click)="this.setBrandName('sc')">
+        <p class="brand-mark" style="color: #8dbbff">SC</p>
+        <p class="brand-name">SHINY COLORS</p>
+      </li>
+
+      <!-- 765PRO ALLSTARS -->
+      <!--
+      <li (click)="this.setBrandName('as')">
+        <p class="brand-mark" style="color: #f34f6d">AS</p>
+        <p class="brand-name">765PRO ALLSTARS</p>
+      </li>
+      -->
+
+      <!-- Side M -->
+      <!--
+      <li (click)="this.setBrandName('sm')">
+        <p class="brand-mark" style="color: #0fbe94">SM</p>
+        <p class="brand-name">SIDE M</p>
+      </li>
+      -->
+    </ul>
+  </div>
+</div>

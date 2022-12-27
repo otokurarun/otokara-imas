@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatTabChangeEvent } from '@angular/material/tabs';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ImasBrand } from '../shared/imas-brand';
 
 /**
  * ホーム画面のコンポーネント
@@ -14,6 +15,9 @@ export class HomePageComponent implements OnInit {
   // 開かれているタブページの番号
   public tabIndex: number = 0;
 
+  // ブランド名
+  public brandName: ImasBrand = 'all';
+
   constructor(private router: Router, private activatedRoute: ActivatedRoute) {}
 
   ngOnInit(): void {
@@ -23,6 +27,15 @@ export class HomePageComponent implements OnInit {
         this.activatedRoute.snapshot.queryParamMap.get('tab')!,
         10
       );
+    }
+
+    // URL のパラメータからブランド名を取得
+    if (this.activatedRoute.snapshot.paramMap.get('brandName')) {
+      this.brandName = this.activatedRoute.snapshot.paramMap.get(
+        'brandName'
+      ) as ImasBrand;
+    } else {
+      this.brandName = 'all';
     }
   }
 

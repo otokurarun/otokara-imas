@@ -1,11 +1,12 @@
 <!-- 楽曲検索フォーム (SongSearchFormComponent) -->
 <app-song-search-form></app-song-search-form>
 
-<!-- TOPページ用楽曲リスト -->
+<!-- TOPページ用楽曲リスト (ブランド別トップページの場合のみ) -->
 <mat-tab-group
   mat-align-tabs="end"
   (selectedTabChange)="this.onSelectedTabChange($event)"
   [selectedIndex]="this.tabIndex"
+  *ngIf="this.brandName != 'all'"
 >
   <!-- 人気順の楽曲リスト -->
   <mat-tab>
