@@ -14,6 +14,7 @@ import { InfoPageComponent } from './info-page/info-page.component';
 import { HomePageComponent } from './home-page/home-page.component';
 import { SongSearchPageComponent } from './song-search-page/song-search-page.component';
 import { SongSearchFormComponent } from './shared/song-search-form/song-search-form.component';
+import { BrandSelectorComponent } from './shared/brand-selector/brand-selector.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { SongSearchFormComponent } from './shared/song-search-form/song-search-f
     HomePageComponent,
     SongSearchPageComponent,
     SongSearchFormComponent,
+    BrandSelectorComponent,
   ],
   imports: [
     BrowserModule,

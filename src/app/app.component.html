@@ -1,10 +1,16 @@
 <mat-toolbar class="toolbar">
-  <h1 class="toolbar__title">
-    <a routerLink="" class="gnav-logo-link">
+  <!-- ブランド選択 -->
+  <app-brand-selector></app-brand-selector>
+
+  <!-- サイト名 -->
+  <h1 class="toolbar-title">
+    <a routerLink="" class="logo-link">
       おとカラゆうき
-      <span class="toolbar__title--small"> アイマス楽曲カラオケ検索 </span>
+      <span class="toolbar-title-small"> アイマス楽曲カラオケ検索 </span>
     </a>
   </h1>
+
+  <!-- お知らせページへのリンク -->
   <a routerLink="/info" mat-icon-button class="info-icon">
     <mat-icon>info</mat-icon>
   </a>

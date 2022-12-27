@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AppService } from 'src/app/app.service';
 import { SearchParams } from '../song-list/search';
 
 @Component({
@@ -12,7 +13,7 @@ export class SongSearchFormComponent implements OnInit {
   @Input()
   public searchParams?: SearchParams;
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private appService: AppService) {}
 
   ngOnInit(): void {}
 
@@ -27,8 +28,13 @@ export class SongSearchFormComponent implements OnInit {
       return;
     }
 
-    // URLを「/imasSongs/songName/アイドルマスター」のように変更 (画面遷移される)
-    this.router.navigate(['imasSongs', 'songName', songName]);
+    // URLを「/:brandName/imasSongs/songName/アイドルマスター」のように変更 (画面遷移される)
+    this.router.navigate([
+      this.appService.getImasBrand(),
+      'imasSongs',
+      'songName',
+      songName,
+    ]);
   }
 
   /**
@@ -42,7 +48,12 @@ export class SongSearchFormComponent implements OnInit {
       return;
     }
 
-    // URLを「/imasSongs/keyword/アイドルマスター」のように変更 (画面遷移される)
-    this.router.navigate(['imasSongs', 'keyword', keyword]);
+    // URLを「/:brandName/imasSongs/keyword/アイドルマスター」のように変更 (画面遷移される)
+    this.router.navigate([
+      this.appService.getImasBrand(),
+      'imasSongs',
+      'keyword',
+      keyword,
+    ]);
   }
 }

@@ -1,0 +1,130 @@
+// モーダル
+
+.modal {
+  background-color: #ffffff88;
+  backdrop-filter: blur(6px);
+  position: fixed;
+  top: 65px;
+  bottom: 0;
+  left: 0;
+  right: 0px;
+  margin: 0 0 0 0;
+  padding: 0 0 0 0;
+  box-sizing: border-box;
+  z-index: 1000;
+}
+
+// ブランド別カラー
+
+.brand-all {
+  color: #ff74b8;
+}
+
+.brand-cg {
+  color: #2681c8;
+}
+
+.brand-sc {
+  color: #8dbbff;
+}
+
+.brand-as {
+  color: #f34f6d;
+}
+
+.brand-ml {
+  color: #ffc309;
+}
+
+.brand-sm {
+  color: #0fbe94;
+}
+
+// ブランド選択を表示するためのボタン
+
+.brand-selector-btn {
+  background-color: #fefefe20;
+  cursor: pointer;
+  user-select: none;
+  font-family: "Raleway", sans-serif;
+  height: 64px;
+  line-height: 64px;
+  position: absolute;
+  text-align: center;
+  vertical-align: middle;
+  width: 80px;
+  left: 0;
+  top: 0;
+  transition: all 0.3s ease-in-out;
+
+  @media screen and (max-width: 599px) {
+    height: 56px;
+    line-height: 56px;
+  }
+
+  &:hover {
+    background-color: #d0d0d030;
+  }
+
+  &.showing {
+    background-color: #d0d0d040;
+  }
+
+  .current-brand {
+    margin: 0 10px 0 20px;
+
+    mat-icon {
+      margin: 0 0 2px 0;
+      vertical-align: middle;
+      opacity: 0.8;
+    }
+  }
+}
+
+// ブランド選択
+
+.brand-selector {
+  padding: 0 0 0 0;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
+
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+
+    li {
+      background-color: #ffffffaa;
+      cursor: pointer;
+      margin: 0 0 0 0;
+      padding: 1.3rem 1.5rem 0.5rem 1rem;
+      border-bottom: 1px solid #dddddd;
+      width: 100%;
+      transition: background-color 0.3s ease-in-out;
+
+      .brand-mark {
+        display: inline-block;
+        font-family: "Raleway", sans-serif;
+        width: 3rem;
+        padding-right: 2rem;
+        text-align: center;
+      }
+
+      .brand-name {
+        color: #444444;
+        font-family: "Roboto", sans-serif;
+        font-weight: lighter;
+        display: inline-block;
+        font-size: 1.2rem;
+        width: 100%;
+      }
+    }
+
+    li:hover {
+      background-color: #d0d0d040;
+    }
+  }
+}

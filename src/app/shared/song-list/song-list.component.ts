@@ -61,14 +61,16 @@ export class SongListComponent implements OnInit, OnChanges {
     // キーワードがあれば、楽曲の検索処理を実行
     if (this.searchType == 'keyword' && this.searchParams.keyword) {
       this.songs = await this.songsService.getSongsByKeyword(
-        this.searchParams.keyword
+        this.searchParams.keyword,
+        this.searchParams.brandName
       );
     }
 
     // 曲名があれば、楽曲の検索処理を実行
     if (this.searchType == 'songName' && this.searchParams.songName) {
       this.songs = await this.songsService.getSongsBySongName(
-        this.searchParams.songName
+        this.searchParams.songName,
+        this.searchParams.brandName
       );
     }
 

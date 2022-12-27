@@ -1,4 +1,10 @@
-import { Component, Input, OnInit } from '@angular/core';
+import {
+  Component,
+  Input,
+  OnChanges,
+  OnInit,
+  SimpleChanges,
+} from '@angular/core';
 import { SongsService } from '../../songs.service';
 
 @Component({
@@ -6,7 +12,7 @@ import { SongsService } from '../../songs.service';
   templateUrl: './live-event-list.component.html',
   styleUrls: ['./live-event-list.component.scss'],
 })
-export class LiveEventListComponent implements OnInit {
+export class LiveEventListComponent implements OnInit, OnChanges {
   public liveEvents: any[] = [];
 
   @Input()
@@ -15,6 +21,14 @@ export class LiveEventListComponent implements OnInit {
   constructor(public songsService: SongsService) {}
 
   async ngOnInit(): Promise<void> {
+    this.load();
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    this.load();
+  }
+
+  async load() {
     this.liveEvents = await this.songsService.getLiveEventsByBrandName(
       this.brandName
     );

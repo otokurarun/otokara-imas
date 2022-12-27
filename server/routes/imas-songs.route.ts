@@ -1,6 +1,7 @@
 import { Router } from 'express';
+import { KaraokeSong } from 'server/entities/karaoke-song.entity';
 import { LiveEvent } from 'server/entities/live-event.entity';
-import { Like } from 'typeorm';
+import { ILike, Like } from 'typeorm';
 
 const imasSongsRouter = Router();
 
@@ -12,16 +13,33 @@ import { KaraokeSongRepository, LiveEventRepository } from '../database';
  * 指定されたキーワードから楽曲を返すAPI
  */
 imasSongsRouter.get('/keyword/:keyword', async (req, res) => {
-  // 検索結果を取得
-  const result = await KaraokeSongRepository.find({
-    where: [
-      { title: Like(`%${req.params.keyword}%`) },
-      { titleYomi: Like(`%${req.params.keyword}%`) },
-      { artist: Like(`%${req.params.keyword}%`) },
-      { artistYomi: Like(`%${req.params.keyword}%`) },
-    ],
-    order: { titleYomi: 'ASC' },
-  });
+  let result: KaraokeSong[] = [];
+
+  if (req.query['brandName']) {
+    const brandName = req.query['brandName'].toString();
+
+    // ブランド名で絞り込んだ検索結果を取得
+    result = await KaraokeSongRepository.find({
+      where: [
+        { title: ILike(`%${req.params.keyword}%`), brand: brandName },
+        { titleYomi: Like(`%${req.params.keyword}%`), brand: brandName },
+        { artist: Like(`%${req.params.keyword}%`), brand: brandName },
+        { artistYomi: Like(`%${req.params.keyword}%`), brand: brandName },
+      ],
+      order: { titleYomi: 'ASC' },
+    });
+  } else {
+    // 検索結果を取得
+    result = await KaraokeSongRepository.find({
+      where: [
+        { title: ILike(`%${req.params.keyword}%`) },
+        { titleYomi: Like(`%${req.params.keyword}%`) },
+        { artist: Like(`%${req.params.keyword}%`) },
+        { artistYomi: Like(`%${req.params.keyword}%`) },
+      ],
+      order: { titleYomi: 'ASC' },
+    });
+  }
 
   // 検索結果をクライアントに返す
   res.send(result);
@@ -32,14 +50,29 @@ imasSongsRouter.get('/keyword/:keyword', async (req, res) => {
  * 指定された曲名から楽曲を返すAPI
  */
 imasSongsRouter.get('/songName/:songName', async (req, res) => {
-  // 検索結果を取得
-  const result = await KaraokeSongRepository.find({
-    where: [
-      { title: Like(`%${req.params.songName}%`) },
-      { titleYomi: Like(`%${req.params.songName}%`) },
-    ],
-    order: { titleYomi: 'ASC' },
-  });
+  let result: KaraokeSong[] = [];
+
+  if (req.query['brandName']) {
+    const brandName = req.query['brandName'].toString();
+
+    // ブランド名で絞り込んだ検索結果を取得
+    result = await KaraokeSongRepository.find({
+      where: [
+        { title: ILike(`%${req.params.songName}%`), brand: brandName },
+        { titleYomi: Like(`%${req.params.songName}%`), brand: brandName },
+      ],
+      order: { titleYomi: 'ASC' },
+    });
+  } else {
+    // 検索結果を取得
+    result = await KaraokeSongRepository.find({
+      where: [
+        { title: ILike(`%${req.params.songName}%`) },
+        { titleYomi: Like(`%${req.params.songName}%`) },
+      ],
+      order: { titleYomi: 'ASC' },
+    });
+  }
 
   // 検索結果をクライアントに返す
   res.send(result);

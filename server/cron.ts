@@ -19,17 +19,18 @@ class Cron {
     // データベースの接続完了まで待機
     await AppDataSource.initialize();
 
-    this.crawlSongs();
-    this.crawlLiveEvents();
+    await this.crawlSongs('cg', 'アイドルマスターシンデレラガールズ');
+    await this.crawlSongs('sc', 'アイドルマスターシャイニーカラーズ');
 
-    this.matchSongOfLiveEvents();
+    await this.crawlLiveEvents('cg', 'cinderella');
+    await this.crawlLiveEvents('sc', 'shiny colors');
+
+    await this.matchSongOfLiveEvents();
   }
 
-  static async crawlSongs() {
+  static async crawlSongs(brand: string, keyword: string) {
     // 楽曲情報を取得
-    const songs = await Cron.getSongsByKeyword(
-      'アイドルマスターシンデレラガールズ'
-    );
+    const songs = await Cron.getSongsByKeyword(keyword);
 
     // 人気順位を初期化
     let rankCount: number = 1;
@@ -46,7 +47,7 @@ class Cron {
         damReleaseDate: song.releaseDate,
         damRequestNo: song.requestNo,
         damRank: rankCount,
-        brand: 'cg',
+        brand: brand,
       });
 
       console.log(`${song.title}を保存しました。`);
@@ -57,10 +58,10 @@ class Cron {
     console.log(`${songs.length}件の楽曲を保存しました。`);
   }
 
-  static async crawlLiveEvents() {
+  static async crawlLiveEvents(brand: string, keyword: string) {
     // ライブのリストを取得
     const liveEvents = await FujiwarahajimeClient.getLiveEventsByKeyword(
-      'cinderella'
+      keyword
     );
 
     let counter = 0;
@@ -127,14 +128,14 @@ class Cron {
         id: liveEvent.tax_id,
         title: liveEvent.name,
         date: liveEvent.date,
-        brandName: 'cg',
+        brandName: brand,
         songs: songs,
       });
 
       console.log(`${liveEvent.name}を保存しました。`);
     }
 
-    console.log(`${liveEvents.length}件のライブを保存しました。`);
+    console.log(`${counter}件のライブを保存しました。`);
   }
 
   static async matchSongOfLiveEvents() {

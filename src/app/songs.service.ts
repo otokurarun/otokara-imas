@@ -9,11 +9,17 @@ export class SongsService {
   /**
    * 指定されたキーワードから楽曲を取得
    * @param keyword キーワード
+   * @param brandName ブランド名
    * @returns 楽曲の配列
    */
-  async getSongsByKeyword(keyword: string) {
+  async getSongsByKeyword(keyword: string, brandName: string = 'all') {
+    let url = `/api/imasSongs/keyword/${keyword}`;
+    if (brandName != 'all') {
+      url += `?brandName=${brandName}`;
+    }
+
     // バックエンドに対してリクエストを送信
-    const apiResponse = await fetch(`/api/imasSongs/keyword/${keyword}`);
+    const apiResponse = await fetch(url);
 
     // リクエストに失敗した場合、エラーをスロー
     if (!apiResponse.ok) {
@@ -30,11 +36,17 @@ export class SongsService {
   /**
    * 指定された曲名から楽曲を取得
    * @param songName 曲名
+   * @param brandName ブランド名
    * @returns 楽曲の配列
    */
-  async getSongsBySongName(songName: string) {
+  async getSongsBySongName(songName: string, brandName: string = 'all') {
+    let url = `/api/imasSongs/songName/${songName}`;
+    if (brandName != 'all') {
+      url += `?brandName=${brandName}`;
+    }
+
     // バックエンドに対してリクエストを送信
-    const apiResponse = await fetch(`/api/imasSongs/songName/${songName}`);
+    const apiResponse = await fetch(url);
 
     // リクエストに失敗した場合、エラーをスロー
     if (!apiResponse.ok) {
