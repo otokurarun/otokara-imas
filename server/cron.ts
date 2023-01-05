@@ -28,6 +28,11 @@ class Cron {
     await this.matchSongOfLiveEvents();
   }
 
+  /**
+   * 指定されたキーワードに当てはまる楽曲を取得しDBに保存
+   * @param brand ブランド名
+   * @param keyword キーワード
+   */
   static async crawlSongs(brand: string, keyword: string) {
     // 楽曲情報を取得
     const songs = await Cron.getSongsByKeyword(keyword);
@@ -58,6 +63,11 @@ class Cron {
     console.log(`${songs.length}件の楽曲を保存しました。`);
   }
 
+  /**
+   * 指定されたキーワードに当てはまるイベントを取得しDBに保存
+   * @param brand ブランド名
+   * @param keyword キーワード
+   */
   static async crawlLiveEvents(brand: string, keyword: string) {
     // ライブのリストを取得
     const liveEvents = await FujiwarahajimeClient.getLiveEventsByKeyword(
@@ -138,6 +148,9 @@ class Cron {
     console.log(`${counter}件のライブを保存しました。`);
   }
 
+  /**
+   * DBに保存されたライブイベントとカラオケ楽曲をマッチング
+   */
   static async matchSongOfLiveEvents() {
     // DBから保存されたライブ情報を取得
     const liveEvents = await LiveEventRepository.find();
@@ -150,8 +163,8 @@ class Cron {
           continue;
         }
 
-        // 楽曲のマッチング
-        const karaokeSong = await KaraokeSongRepository.findOne({
+        // 条件に当てはまる楽曲を取得
+        const karaokeSongs = await KaraokeSongRepository.find({
           where: [
             {
               title: Like(`${liveSong.title.replace(/[ 　]/g, '%')}%`),
@@ -167,14 +180,19 @@ class Cron {
           ],
         });
 
-        if (!karaokeSong) {
-          continue;
+        for (let karaokeSong of karaokeSongs) {
+          // 楽曲タイトルに「G@ME VERSION」が含まれるならスキップ
+          if (karaokeSong.title.match('G@ME VERSION')) {
+            continue;
+          } else {
+            // ライブ楽曲とrequestNoを紐付け
+            liveSong.damRequestNo = karaokeSong.damRequestNo;
+            console.log(
+              `${liveSong.title}と${karaokeSong.title}をマッチングしました。`
+            );
+            break;
+          }
         }
-
-        liveSong.damRequestNo = karaokeSong.damRequestNo;
-        console.log(
-          `${liveSong.title}と${karaokeSong.title}をマッチングしました。`
-        );
       }
 
       await liveEvent.save();
