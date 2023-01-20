@@ -19,12 +19,17 @@ class Cron {
     // データベースの接続完了まで待機
     await AppDataSource.initialize();
 
+    // DAMから楽曲を取得しDBに保存
     await this.crawlSongs('cg', 'アイドルマスターシンデレラガールズ');
     await this.crawlSongs('sc', 'アイドルマスターシャイニーカラーズ');
+    await this.crawlSongs('ml', 'アイドルマスターミリオンライブ');
 
+    // ふじわらはじめからライブイベントを取得しDBに保存
     await this.crawlLiveEvents('cg', 'cinderella');
     await this.crawlLiveEvents('sc', 'shiny colors');
+    await this.crawlLiveEvents('ml', 'million live');
 
+    // ライブイベントと楽曲をマッチング
     await this.matchSongOfLiveEvents();
   }
 
