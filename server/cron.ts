@@ -4,6 +4,8 @@ dotenv.config({ path: `${__dirname}/.env` });
 
 import { FujiwarahajimeClient } from './fujiwarahajime-client';
 
+import { Helper } from './helper';
+
 // Database接続を初期化
 import {
   AppDataSource,
@@ -168,19 +170,33 @@ class Cron {
           continue;
         }
 
+        const songTitle = liveSong.title;
+
+        // 楽曲名の機種依存文字をスペースに置換
+        const replacedSongTitle =
+          Helper.replacePlatformDependentCharacter(songTitle);
+
+        // 検索条件を設定
+        const searchCondition = {
+          // そのままの条件
+          default: replacedSongTitle.replace(/[ 　]/g, '%') + '%',
+          // 全角記号を半角にした条件
+          replaceSymbol:
+            replacedSongTitle
+              .replace(/[ 　]/g, '%')
+              .replace(/[！-～]/g, (str) => {
+                return String.fromCharCode(str.charCodeAt(0) - 0xfee0);
+              }) + '%',
+        };
+
         // 条件に当てはまる楽曲を取得
         const karaokeSongs = await KaraokeSongRepository.find({
           where: [
             {
-              title: Like(`${liveSong.title.replace(/[ 　]/g, '%')}%`),
+              title: Like(searchCondition.default),
             },
             {
-              title: Like(
-                `${liveSong.title.replace(/[！-～]/g, (str) => {
-                  // 全角記号を半角記号に変換
-                  return String.fromCharCode(str.charCodeAt(0) - 0xfee0);
-                })}%`
-              ),
+              title: Like(searchCondition.replaceSymbol),
             },
           ],
         });
