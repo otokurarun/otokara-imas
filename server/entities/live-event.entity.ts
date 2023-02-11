@@ -13,9 +13,8 @@ export class LiveEvent extends BaseEntity {
 
   @Column({
     type: 'simple-array',
-    nullable: true,
   })
-  brandNames?: string[];
+  brandNames: string[];
 
   @Column({
     default: 0,
