@@ -103,7 +103,7 @@ class Cron {
         damRequestNo?: string;
       }[] = [];
 
-      // ライブのメンバー情報をもとにしてどのブランドのライブかを特定
+      // ブランドの特定 - ライブのメンバー情報から
       let brandNames: Set<string> = new Set();
       for (let member of liveEventDetail.member) {
         if (member.production) {
@@ -115,8 +115,25 @@ class Cron {
         }
       }
 
+      // ブランドの特定 - 楽曲情報から
+      for (let song of liveEventDetail.song) {
+        if (song.music_type) {
+          switch (song.music_type) {
+            case '765':
+              brandNames.add('as');
+              break;
+            case 'cg':
+            case 'ml':
+            case 'sm':
+            case 'sc':
+              brandNames.add(song.music_type);
+              break;
+          }
+        }
+      }
+
       if (1 <= brandNames.size) {
-        // ブランドが一つでもあれば、楽曲情報を反復
+        // ブランドが一つでもあれば、楽曲情報を反復して追加していく
 
         for (let song of liveEventDetail.song) {
           if (song.name == null) {
