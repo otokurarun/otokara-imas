@@ -7,6 +7,7 @@ const databaseUrl: string = process.env['DATABASE_URL'] as string;
 if (!databaseUrl) {
   throw '環境変数 DATABASE_URL が未指定です';
 }
+const isLocalHost = databaseUrl.match(/@localhost/);
 
 // データベース接続の初期化
 export const AppDataSource = new DataSource({
@@ -15,9 +16,11 @@ export const AppDataSource = new DataSource({
   logging: !process.env['NODE_ENV'] || process.env['NODE_ENV'] != 'production',
   entities: [KaraokeSong, LiveEvent],
   synchronize: true,
-  ssl: {
-    rejectUnauthorized: false,
-  },
+  ssl: isLocalHost
+    ? undefined
+    : {
+        rejectUnauthorized: false,
+      },
 });
 
 // 各エンティティをリポジトリとして取得してエクスポート

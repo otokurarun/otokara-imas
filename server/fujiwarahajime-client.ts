@@ -59,6 +59,26 @@ export interface LiveEventDetailResponse {
 
 export class FujiwarahajimeClient {
   /**
+   * すべてのライブ情報を取得
+   * @returns ライブ情報の配列
+   */
+  static async getLiveEvents() {
+    const requestUrl = `${FUJIWARA_HAJIME_API_ENDPOINT}/list?type=live`;
+
+    const apiResponse = await fetch(requestUrl);
+
+    if (apiResponse.status != 200) {
+      // リクエストに失敗したならば、エラーを返す
+      throw apiResponse;
+    }
+
+    // 検索結果を取得
+    const result = await apiResponse.json();
+
+    return result;
+  }
+
+  /**
    * 指定されたキーワードからライブ情報を取得
    * @param keyword keyword
    * @returns ライブ情報の配列

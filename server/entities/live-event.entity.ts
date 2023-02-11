@@ -11,8 +11,16 @@ export class LiveEvent extends BaseEntity {
   @Column()
   date: string;
 
-  @Column()
-  brandName: string;
+  @Column({
+    type: 'simple-array',
+    nullable: true,
+  })
+  brandNames?: string[];
+
+  @Column({
+    default: 0,
+  })
+  numOfMatchedSongs: number;
 
   @Column({
     type: 'jsonb',
