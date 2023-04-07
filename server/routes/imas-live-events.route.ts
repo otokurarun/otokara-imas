@@ -1,5 +1,6 @@
 import { Router } from 'express';
 import { LiveEvent } from 'server/entities/live-event.entity';
+import { MoreThanOrEqual } from 'typeorm';
 
 const imasLiveEventsRouter = Router();
 
@@ -11,18 +12,21 @@ import { LiveEventRepository } from '../database';
  * 指定されたブランド名のライブまたは全てのライブ情報を返すAPI
  */
 imasLiveEventsRouter.get('/', async (req, res) => {
-  let result: LiveEvent[] = [];
+  // データベースからライブのリストを取得
+  let result: LiveEvent[] = await LiveEventRepository.find({
+    where: {
+      numOfMatchedSongs: MoreThanOrEqual(1),
+    },
+    select: ['id', 'title', 'date', 'brandNames'],
+    order: { date: 'desc' },
+  });
 
   if (req.query['brandName']) {
-    result = await LiveEventRepository.find({
-      where: { brandName: req.query['brandName'].toString() },
-      select: ['id', 'title', 'date', 'brandName'],
-      order: { date: 'desc' },
-    });
-  } else {
-    result = await LiveEventRepository.find({
-      select: ['id', 'title', 'date', 'brandName'],
-      order: { date: 'desc' },
+    // ブランド名が指定されている場合は、そのブランドを含んだライブのみに絞る
+    const brandName = req.query['brandName'] as string;
+    result = result.filter((liveEvent) => {
+      if (!liveEvent.brandNames) return false;
+      return liveEvent.brandNames.includes(brandName);
     });
   }
 
@@ -37,7 +41,7 @@ imasLiveEventsRouter.get('/:id', async (req, res): Promise<any> => {
 
   const result = await LiveEventRepository.findOne({
     where: { id: id },
-    select: ['id', 'title', 'date', 'brandName'],
+    select: ['id', 'title', 'date', 'brandNames'],
   });
 
   res.send(result);

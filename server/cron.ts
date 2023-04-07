@@ -27,9 +27,7 @@ class Cron {
     await this.crawlSongs('ml', 'アイドルマスターミリオンライブ');
 
     // ふじわらはじめからライブイベントを取得しDBに保存
-    await this.crawlLiveEvents('cg', 'cinderella');
-    await this.crawlLiveEvents('sc', 'shiny colors');
-    await this.crawlLiveEvents('ml', 'million live');
+    await this.crawlLiveEvents();
 
     // ライブイベントと楽曲をマッチング
     await this.matchSongOfLiveEvents();
@@ -71,15 +69,11 @@ class Cron {
   }
 
   /**
-   * 指定されたキーワードに当てはまるイベントを取得しDBに保存
-   * @param brand ブランド名
-   * @param keyword キーワード
+   * ふじわらはじめAPIからイベントを取得しDBに保存
    */
-  static async crawlLiveEvents(brand: string, keyword: string) {
+  static async crawlLiveEvents() {
     // ライブのリストを取得
-    const liveEvents = await FujiwarahajimeClient.getLiveEventsByKeyword(
-      keyword
-    );
+    const liveEvents = await FujiwarahajimeClient.getLiveEvents();
 
     let counter = 0;
     for (let liveEvent of liveEvents) {
@@ -102,42 +96,59 @@ class Cron {
       const liveEventDetail =
         await FujiwarahajimeClient.getLiveEventDetailByTaxId(liveEvent.tax_id);
 
+      // 楽曲配列を初期化
       let songs: {
         title: string;
         artist: string;
         damRequestNo?: string;
       }[] = [];
 
-      for (let song of liveEventDetail.song) {
-        if (song.name == null) {
-          continue;
+      // ライブのメンバー情報をもとにしてどのブランドのライブかを特定
+      let brandNames: Set<string> = new Set();
+      for (let member of liveEventDetail.member) {
+        if (member.production) {
+          if (member.production === '765') {
+            brandNames.add('as');
+          } else {
+            brandNames.add(member.production);
+          }
         }
+      }
 
-        let artists: string[] = [];
+      if (1 <= brandNames.size) {
+        // ブランドが一つでもあれば、楽曲情報を反復
 
-        if (song.unit) {
-          for (let unit of song.unit) {
-            for (let member of unit.member) {
+        for (let song of liveEventDetail.song) {
+          if (song.name == null) {
+            continue;
+          }
+
+          let artists: string[] = [];
+
+          if (song.unit) {
+            for (let unit of song.unit) {
+              for (let member of unit.member) {
+                artists.push(member.name);
+              }
+            }
+          }
+
+          if (song.member) {
+            for (let member of song.member) {
               artists.push(member.name);
             }
           }
+
+          // アーティスト情報を配列から文字列に変換
+          let artistString: string = artists.join('、');
+
+          // 楽曲情報を配列にプッシュ
+          songs.push({
+            title: song.name,
+            artist: artistString,
+            damRequestNo: undefined,
+          });
         }
-
-        if (song.member) {
-          for (let member of song.member) {
-            artists.push(member.name);
-          }
-        }
-
-        // アーティスト情報を配列から文字列に変換
-        let artistString: string = artists.join('、');
-
-        // 楽曲情報を配列にプッシュ
-        songs.push({
-          title: song.name,
-          artist: artistString,
-          damRequestNo: undefined,
-        });
       }
 
       //ライブ情報をDBに保存
@@ -145,10 +156,9 @@ class Cron {
         id: liveEvent.tax_id,
         title: liveEvent.name,
         date: liveEvent.date,
-        brandName: brand,
+        brandNames: Array.from(brandNames.values()),
         songs: songs,
       });
-
       console.log(`${liveEvent.name}を保存しました。`);
     }
 
@@ -162,11 +172,21 @@ class Cron {
     // DBから保存されたライブ情報を取得
     const liveEvents = await LiveEventRepository.find();
 
-    // 各ライブ情報の楽曲を反復
+    // 各ライブを反復
     for (let liveEvent of liveEvents) {
+      if (!liveEvent.brandNames || liveEvent.brandNames.length == 0) {
+        // ブランドが登録されていないライブ (声優さんのイベントなど？) はスキップ
+        continue;
+      }
+
+      // ライブの楽曲数を初期化
+      let numOfMatchedSongs = 0;
+
+      // 各ライブ情報の楽曲を反復
       for (let liveSong of liveEvent.songs) {
         // DAMリクエスト番号が入っていればなにもしない
         if (liveSong.damRequestNo !== undefined) {
+          numOfMatchedSongs++;
           continue;
         }
 
@@ -184,7 +204,7 @@ class Cron {
           replaceSymbol:
             replacedSongTitle
               .replace(/[ 　]/g, '%')
-              .replace(/[！-～]/g, (str) => {
+              .replace(/[！-～]/g, (str: string) => {
                 return String.fromCharCode(str.charCodeAt(0) - 0xfee0);
               }) + '%',
         };
@@ -211,11 +231,14 @@ class Cron {
             console.log(
               `${liveSong.title}と${karaokeSong.title}をマッチングしました。`
             );
+            numOfMatchedSongs++;
             break;
           }
         }
       }
 
+      // ライブ情報をDBに保存 (または上書き)
+      liveEvent.numOfMatchedSongs = numOfMatchedSongs;
       await liveEvent.save();
     }
   }
