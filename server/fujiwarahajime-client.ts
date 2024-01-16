@@ -1,6 +1,6 @@
 import fetch from 'node-fetch';
 
-const FUJIWARA_HAJIME_API_ENDPOINT = 'https://api.fujiwarahaji.me/v2/';
+const FUJIWARA_HAJIME_API_ENDPOINT = 'https://api.fujiwarahaji.me/v3/';
 
 export interface LiveEventDetailResponse {
   name: string;
@@ -10,15 +10,17 @@ export interface LiveEventDetailResponse {
   api: string;
   date: string;
   place: string;
-  member: {
-    name: string;
-    type: string;
-    tax_id: number;
-    link: string;
-    api: string;
-    production: string;
-    cv: string;
-  }[];
+  member:
+    | {
+        name: string;
+        type: string;
+        tax_id: number;
+        link: string;
+        api: string;
+        production: string;
+        cv: string;
+      }[]
+    | null;
   setlist: boolean;
   song: {
     name: string | null;

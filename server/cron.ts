@@ -87,7 +87,9 @@ class Cron {
         continue;
       }
 
-      if (1 < counter) {
+      // 一度に取得するライブ情報の最大取得件数を設定
+      const maxGetLiveEventNum = 5;
+      if (maxGetLiveEventNum < counter) {
         break;
       }
       counter++;
@@ -105,12 +107,15 @@ class Cron {
 
       // ライブのメンバー情報をもとにしてどのブランドのライブかを特定
       let brandNames: Set<string> = new Set();
-      for (let member of liveEventDetail.member) {
-        if (member.production) {
-          if (member.production === '765') {
-            brandNames.add('as');
-          } else {
-            brandNames.add(member.production);
+
+      if (liveEventDetail.member) {
+        for (let member of liveEventDetail.member) {
+          if (member.production) {
+            if (member.production === '765') {
+              brandNames.add('as');
+            } else {
+              brandNames.add(member.production);
+            }
           }
         }
       }
