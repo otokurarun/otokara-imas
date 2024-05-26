@@ -1,1 +1,1 @@
-export type ImasBrand = 'all' | 'cg' | 'sc' | 'as' | 'sm' | 'ml';
+export type ImasBrand = 'all' | 'cg' | 'sc' | '765' | 'sm';

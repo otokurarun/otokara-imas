@@ -10,16 +10,14 @@
       'brand-all': this.currentBrandName === 'all',
       'brand-cg': this.currentBrandName === 'cg',
       'brand-sc': this.currentBrandName === 'sc',
-      'brand-as': this.currentBrandName === 'as',
-      'brand-ml': this.currentBrandName === 'ml',
+      'brand-as': this.currentBrandName === '765',
       'brand-sm': this.currentBrandName === 'sm'
     }"
   >
     <ng-container *ngIf="this.currentBrandName == 'all'">ALL</ng-container>
     <ng-container *ngIf="this.currentBrandName == 'cg'">CG</ng-container>
     <ng-container *ngIf="this.currentBrandName == 'sc'">SC</ng-container>
-    <ng-container *ngIf="this.currentBrandName == 'as'">AS</ng-container>
-    <ng-container *ngIf="this.currentBrandName == 'ml'">ML</ng-container>
+    <ng-container *ngIf="this.currentBrandName == '765'">765</ng-container>
     <ng-container *ngIf="this.currentBrandName == 'sm'">SM</ng-container>
     <mat-icon>arrow_drop_down</mat-icon>
   </div>
@@ -48,19 +46,11 @@
         <p class="brand-name">SHINY COLORS</p>
       </li>
 
-      <!-- ミリオンライブ -->
-      <li (click)="this.setBrandName('ml')">
-        <p class="brand-mark" style="color: #ffc309">ML</p>
-        <p class="brand-name">MILLION LIVE!</p>
+      <!-- 765PRO -->
+      <li (click)="this.setBrandName('765')">
+        <p class="brand-mark" style="color: #f34f6d">765</p>
+        <p class="brand-name">765PRO</p>
       </li>
-
-      <!-- 765PRO ALLSTARS -->
-      <!--
-      <li (click)="this.setBrandName('as')">
-        <p class="brand-mark" style="color: #f34f6d">AS</p>
-        <p class="brand-name">765PRO ALLSTARS</p>
-      </li>
-      -->
 
       <!-- Side M -->
       <!--

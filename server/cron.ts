@@ -24,7 +24,7 @@ class Cron {
     // DAMから楽曲を取得しDBに保存
     await this.crawlSongs('cg', 'アイドルマスターシンデレラガールズ');
     await this.crawlSongs('sc', 'アイドルマスターシャイニーカラーズ');
-    await this.crawlSongs('ml', 'アイドルマスターミリオンライブ');
+    await this.crawlSongs('765', 'アイドルマスターミリオンライブ');
 
     // ふじわらはじめからライブイベントを取得しDBに保存
     await this.crawlLiveEvents();
